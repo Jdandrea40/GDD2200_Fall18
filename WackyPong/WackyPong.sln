@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{AE0A268E-7DB1-FAD7-748A-1AEA76619058}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WackyPong", "Assembly-CSharp.csproj", "{AE0A268E-7DB1-FAD7-748A-1AEA76619058}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WackyPongDocumentation", "WackyPongDocumentation\WackyPongDocumentation.csproj", "{4672CD44-BBCF-48F0-86FF-94061E2D9B05}"
 EndProject
