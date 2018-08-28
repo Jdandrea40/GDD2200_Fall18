@@ -17,6 +17,12 @@ public static class ConfigurationUtils
         get { return 10; }
     }
 
+    // Gets ball impulse force
+    public static float BallImpulseForce
+    {
+        get { return 5; }
+    }
+
     #endregion
 
     /// <summary>

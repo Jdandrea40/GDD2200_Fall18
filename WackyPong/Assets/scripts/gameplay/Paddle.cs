@@ -8,12 +8,15 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     // Saved for efficiency
-    [SerializeField]
-    int paddleSpeed = 5;     // Serialized to allow Inspector Changes
-
+    float paddleSpeed = ConfigurationUtils.PaddleMoveUnitsPerSecond;
     Rigidbody2D rb2d;
 
-    
+    // Gets Enumeration
+    [SerializeField]
+    ScreenSide screenSide;
+
+    BoxCollider2D bc2d;
+    float halfHeight;
 
 
     /// <summary>
@@ -21,22 +24,65 @@ public class Paddle : MonoBehaviour
     /// </summary>
     void Start()
 	{
-
+        // Gets Rigidbody2D compnent
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+        //Gets BoxCollider2D component
+        bc2d = GetComponent<BoxCollider2D>();
+
+        // Get half bc2d height
+        halfHeight = bc2d.size.y / 2;
+
+ 
 	}
 
     
-
-    void Update()
+    /// <summary>
+    /// Called 50 times per second
+    /// </summary>
+    void FixedUpdate()
     {
-        float paddleInput1 = Input.GetAxisRaw("Paddle1");
+        // saved for efficiency
+        float leftPaddleInput = Input.GetAxisRaw("LeftPaddle");
+        float rightPaddleInput = Input.GetAxisRaw("RightPaddle");
 
-        if(paddleInput1 != 0)
+        // Handles input and movement of Left Paddle
+        if(leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle"))
         {
             Vector2 position = rb2d.position;
-            position.y += paddleInput1 * paddleSpeed * Time.deltaTime;
+            position.y += leftPaddleInput * paddleSpeed * Time.deltaTime;
+            position.y = CalculateClampedY(position.y);
+
+            rb2d.MovePosition(position);
+        }
+
+        // Handles input and movement of Right Paddle
+        if(rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle"))
+        {
+            Vector2 position = rb2d.position;
+            position.y += rightPaddleInput * paddleSpeed * Time.deltaTime;
+            position.y = CalculateClampedY(position.y);
+            
             rb2d.MovePosition(position);
         }
 
     }	
+
+    /// <summary>
+    /// Keeps paddle in playfield by calculating new y position
+    /// </summary>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    float CalculateClampedY(float y)
+    {
+        if (y + halfHeight > ScreenUtils.ScreenTop)
+        {
+            y = ScreenUtils.ScreenTop - halfHeight;
+        }
+        if (y - halfHeight < ScreenUtils.ScreenBottom)
+        {
+            y = ScreenUtils.ScreenBottom + halfHeight;
+        }
+        return y;
+    }
 }
