@@ -13,6 +13,8 @@ public class Paddle : MonoBehaviour
 
     Rigidbody2D rb2d;
 
+    
+
 
     /// <summary>
     /// Use this for initialization
@@ -25,25 +27,16 @@ public class Paddle : MonoBehaviour
 
     
 
-    void FixedUpdate()
-    {
-        if(Input.GetAxisRaw("Paddle1") != 0)
-        {
-            transform.Translate(new Vector3(0, Input.GetAxisRaw("Paddle1") * paddleSpeed * Time.deltaTime, 0));
-            Debug.Log("Input registered");
-        }
-        else
-        {
-            paddleSpeed = 0;
-        }
-    }
-
-    /// <summary>
-    /// Update is called once per frame
-    /// </summary>
     void Update()
-	{
-		
-	}
-	
+    {
+        float paddleInput1 = Input.GetAxisRaw("Paddle1");
+
+        if(paddleInput1 != 0)
+        {
+            Vector2 position = rb2d.position;
+            position.y += paddleInput1 * paddleSpeed * Time.deltaTime;
+            rb2d.MovePosition(position);
+        }
+
+    }	
 }

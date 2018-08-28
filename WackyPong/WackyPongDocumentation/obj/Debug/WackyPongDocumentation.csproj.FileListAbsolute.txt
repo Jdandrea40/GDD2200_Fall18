@@ -13,3 +13,10 @@ C:\Users\Josh\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\o
 C:\Users\Josh\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.csproj.CoreCompileInputs.cache
 C:\Users\Josh\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.exe
 C:\Users\Josh\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.pdb
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\bin\Debug\WackyPongDocumentation.exe.config
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\bin\Debug\WackyPongDocumentation.exe
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\bin\Debug\WackyPongDocumentation.pdb
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.csprojAssemblyReference.cache
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.csproj.CoreCompileInputs.cache
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.exe
+C:\Users\jdand\Documents\GitHub\GDD2200_Fall18\WackyPong\WackyPongDocumentation\obj\Debug\WackyPongDocumentation.pdb
