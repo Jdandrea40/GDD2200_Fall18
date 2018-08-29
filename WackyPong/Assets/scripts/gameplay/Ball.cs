@@ -10,28 +10,46 @@ public class Ball : MonoBehaviour
     // saved for efficiency
     float ballImpulse = ConfigurationUtils.BallImpulseForce;
     Rigidbody2D rb2d;
-    float degree;
 
+    float maxAngle;         // maximum angle allowed
+    float minAngle;         // minimum angle allowed
+    
 	/// <summary>
 	/// Use this for initialization
 	/// </summary>
 	void Start()
 	{
-
         // gets Rigidbody2D Componenet
         rb2d = GetComponent<Rigidbody2D>();
-        degree = Random.Range(135, 225);
-        float radians = degree * Mathf.Deg2Rad;
-        Debug.Log(radians);
 
-        //transform.position = new Vector3(Random.Range(135, 225), transform.position.y, transform.position.z);
-        //Vector2 direction = transform.forward;
-        //direction = new Vector2(1, direction.y);
-        //rb2d.AddForce(new Vector2(Mathf.Cos(45) * ballImpulse, 0f));
+        // Angle selection support
+        float angleSelect = Random.value;
+        // Sets min and max angle off of Random.Range
+        if (angleSelect < 0.5f)
+        {
+            // sets left side angle to radians
+            minAngle = 135 * Mathf.Deg2Rad;
+            maxAngle = 225 * Mathf.Deg2Rad;
+        }
+        else
+        {
+            // sets right side angle to radians
+            minAngle = -45f * Mathf.Deg2Rad;
+            maxAngle = 45f * Mathf.Deg2Rad;
+        }
 
-        Vector2 direction = new Vector2(Random.Range(135, 225), transform.position.y);
-        rb2d.AddForce(-direction * ballImpulse);
+        // randomly selects from the min and max angles
+        float angle = Random.Range(minAngle, maxAngle);
 
+        // sets new direction
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+        // Used for testing
+        Debug.Log(direction);
+        Debug.Log(ballImpulse);
+
+        /// Adds a force and direction to the ball
+        rb2d.AddForce(direction * ballImpulse, ForceMode2D.Impulse);
     }
 	
 	/// <summary>
@@ -41,4 +59,23 @@ public class Ball : MonoBehaviour
 	{
 		
 	}
+
+    /// <summary>
+    /// Sets Ball Direction
+    /// </summary>
+    /// <param name="direction"></param>
+    public void SetDirection(Vector2 direction)
+    {
+        Vector2 velocity = rb2d.velocity.magnitude * direction;
+        rb2d.velocity = velocity;
+
+    }
+
+    /// <summary>
+    /// Destroys ball when offscreen
+    /// </summary>
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }
