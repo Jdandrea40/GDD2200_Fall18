@@ -44,10 +44,6 @@ public class Ball : MonoBehaviour
         // sets new direction
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-        // Used for testing
-        Debug.Log(direction);
-        Debug.Log(ballImpulse);
-
         /// Adds a force and direction to the ball
         rb2d.AddForce(direction * ballImpulse, ForceMode2D.Impulse);
     }

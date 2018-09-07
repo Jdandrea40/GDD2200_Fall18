@@ -34,7 +34,7 @@ public class ConfigurationData
     /// <value>impulse force</value>
     public float BallImpulseForce
     {
-        get { return ballImpulseForce; }    
+        get { return ballImpulseForce; }
     }
 
     #endregion
