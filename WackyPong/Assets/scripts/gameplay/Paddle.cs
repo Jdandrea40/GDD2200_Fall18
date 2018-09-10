@@ -8,7 +8,6 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     // Saved for efficiency
-    float paddleSpeed = ConfigurationUtils.PaddleMoveUnitsPerSecond;
     Rigidbody2D rb2d;
 
     // Gets Enumeration
@@ -34,7 +33,8 @@ public class Paddle : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
 
         // Get half bc2d height
-        halfHeight = bc2d.size.y / 2; 
+        halfHeight = bc2d.size.y / 2;
+
 	}
     
     /// <summary>
@@ -50,7 +50,7 @@ public class Paddle : MonoBehaviour
         if(leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle"))
         {
             Vector2 position = rb2d.position;
-            position.y += leftPaddleInput * paddleSpeed * Time.deltaTime;
+            position.y += leftPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
             position.y = CalculateClampedY(position.y);
 
             rb2d.MovePosition(position);
@@ -60,7 +60,7 @@ public class Paddle : MonoBehaviour
         if(rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle"))
         {
             Vector2 position = rb2d.position;
-            position.y += rightPaddleInput * paddleSpeed * Time.deltaTime;
+            position.y += rightPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
             position.y = CalculateClampedY(position.y);
             
             rb2d.MovePosition(position);

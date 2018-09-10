@@ -12,11 +12,11 @@ public class GameInitializer : MonoBehaviour
     /// </summary>
 	void Awake()
     {
+        // initialize ConfigUtils
         ConfigurationUtils.Initialize();
 
         // initialize screen utils
         ScreenUtils.Initialize();
-
 
     }
 }

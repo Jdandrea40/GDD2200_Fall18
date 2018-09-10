@@ -8,7 +8,6 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     // saved for efficiency
-    float ballImpulse = ConfigurationUtils.BallImpulseForce;
     Rigidbody2D rb2d;
 
     float maxAngle;         // maximum angle allowed
@@ -45,7 +44,7 @@ public class Ball : MonoBehaviour
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
         /// Adds a force and direction to the ball
-        rb2d.AddForce(direction * ballImpulse, ForceMode2D.Impulse);
+        rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
     }
 	
 	/// <summary>

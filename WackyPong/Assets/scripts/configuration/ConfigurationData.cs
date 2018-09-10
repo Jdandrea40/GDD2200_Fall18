@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
 
 /// <summary>
 /// A container for the configuration data
@@ -9,11 +11,11 @@ public class ConfigurationData
 {
     #region Fields
 
-    const string ConfigurationDataFileName = "ConfigurationData.csv";
+    const string ConfigurationDataFileName = "ConfigurationDataAssets.csv";
 
     // configuration data
     static float paddleMoveUnitsPerSecond = 10;
-    static float ballImpulseForce = 200;
+    static float ballImpulseForce = 5;
 
     #endregion
 
@@ -49,7 +51,53 @@ public class ConfigurationData
     /// </summary>
     public ConfigurationData()
     {
-        
+        // Sets Reader to null 
+        StreamReader input = null;
+
+        // Tries to Open File if available
+        try
+        {
+            // the file that will be opened
+            input = File.OpenText(Path.Combine(
+                Application.streamingAssetsPath, ConfigurationDataFileName));
+
+            // Stores taken values
+            string names = input.ReadLine();
+            string values = input.ReadLine();
+
+            // Sets approprite values to be used
+            SetConfigData(values);
+
+            
+        }
+        // Catches if try fails
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        // closes file
+        finally
+        {
+            if (input != null)
+            {
+                input.Close();
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Method for spliting csv file values
+    /// </summary>
+    /// <param name="csvValues"></param>
+    void SetConfigData (string csvValues)
+    {
+        // splits "values"
+        string[] values = csvValues.Split(',');
+
+        // Parses strings to approprite data types
+        ballImpulseForce = float.Parse(values[0]);
+        paddleMoveUnitsPerSecond = float.Parse(values[1]);
+
     }
 
     #endregion
