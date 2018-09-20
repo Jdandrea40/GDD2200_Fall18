@@ -9,17 +9,20 @@ public class Paddle : MonoBehaviour
 {
     // Saved for efficiency
     Rigidbody2D rb2d;
+    HUD hud;
 
     // Gets Enumeration
     [SerializeField]
-    ScreenSide screenSide;
+    static ScreenSide screenSide;
 
     // Box Collider Support
     BoxCollider2D bc2d;
-    float halfHeight;
+    float colliderHalfHeight;
+    float colliderHalfWidth;
 
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;      // const value saved for paddle bounce
 
+    BoxCollider2D ballColl;
 
     /// <summary>
     /// Use this for initialization
@@ -29,11 +32,17 @@ public class Paddle : MonoBehaviour
         // Gets Rigidbody2D compnent
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         
-        //Gets BoxCollider2D component
+        // Gets BoxCollider2D component
         bc2d = GetComponent<BoxCollider2D>();
 
+        // Gets HUD Component
+        hud = GetComponent<HUD>();
+
+
+
         // Get half bc2d height
-        halfHeight = bc2d.size.y / 2;
+        colliderHalfHeight = bc2d.size.y / 2;
+        colliderHalfWidth = bc2d.size.x / 2;
 
 	}
     
@@ -75,14 +84,14 @@ public class Paddle : MonoBehaviour
     float CalculateClampedY(float y)
     {
         // sets Top Screen Bounds
-        if (y + halfHeight > ScreenUtils.ScreenTop)
+        if (y + colliderHalfHeight > ScreenUtils.ScreenTop)
         {
-            y = ScreenUtils.ScreenTop - halfHeight;
+            y = ScreenUtils.ScreenTop - colliderHalfHeight;
         }
         // sets Bottom Screen Bounds
-        if (y - halfHeight < ScreenUtils.ScreenBottom)
+        if (y - colliderHalfHeight < ScreenUtils.ScreenBottom)
         {
-            y = ScreenUtils.ScreenBottom + halfHeight;
+            y = ScreenUtils.ScreenBottom + colliderHalfHeight;
         }
         return y;
     }
@@ -99,7 +108,7 @@ public class Paddle : MonoBehaviour
             float ballOffsetFromPaddleCenter =
                 coll.transform.position.y - transform.position.y;
             float normalizedBallOffset = ballOffsetFromPaddleCenter /
-                halfHeight;
+                colliderHalfHeight;
             float angleOffset = normalizedBallOffset * BounceAngleHalfRange;
 
             // angle modification is based on screen side
@@ -107,6 +116,8 @@ public class Paddle : MonoBehaviour
             if (screenSide == ScreenSide.Left)
             {
                 angle = angleOffset;
+                
+
             }
             else
             {
@@ -119,4 +130,13 @@ public class Paddle : MonoBehaviour
             ballScript.SetDirection(direction);
         }
     }
+
+    //bool FrontHitCollision(Collision2D coll)
+    //{
+    //    if (screenSide == ScreenSide.Left && coll.transform.position.x +  > colliderHalfWidth + transform.position.x)
+    //    {
+    //        return true;
+    //    }
+    //    return true;
+    //}
 }

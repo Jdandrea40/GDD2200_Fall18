@@ -10,13 +10,30 @@ public class Ball : MonoBehaviour
     // saved for efficiency
     Rigidbody2D rb2d;
 
+    // Timer support
+    Timer timer;
+    float deathTimer;
+
+    // hit count support
+    int hits = 0;
+
     float maxAngle;         // maximum angle allowed
     float minAngle;         // minimum angle allowed
-    
-	/// <summary>
-	/// Use this for initialization
-	/// </summary>
-	void Start()
+
+    #region Properties
+    /// <summary>
+    /// Hit property to allow hit increase in HUD
+    /// </summary>
+    public int Hits
+    {
+        get { return hits; }
+    }
+    #endregion
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    void Start()
 	{
         // gets Rigidbody2D Componenet
         rb2d = GetComponent<Rigidbody2D>();
