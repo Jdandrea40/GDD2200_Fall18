@@ -102,7 +102,7 @@ public class Paddle : MonoBehaviour
     /// <param name="coll">collision info</param>
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Ball"))
+        if (coll.gameObject.CompareTag("Ball") && FrontHitCollision(coll) == true)
         {
             // calculate new ball direction
             float ballOffsetFromPaddleCenter =
@@ -116,8 +116,6 @@ public class Paddle : MonoBehaviour
             if (screenSide == ScreenSide.Left)
             {
                 angle = angleOffset;
-                
-
             }
             else
             {
@@ -131,12 +129,19 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    //bool FrontHitCollision(Collision2D coll)
-    //{
-    //    if (screenSide == ScreenSide.Left && coll.transform.position.x +  > colliderHalfWidth + transform.position.x)
-    //    {
-    //        return true;
-    //    }
-    //    return true;
-    //}
+    bool FrontHitCollision(Collision2D coll)
+    {
+        if (screenSide == ScreenSide.Left && coll.transform.position.x > colliderHalfWidth * 2 + transform.position.x)
+        {
+            return true;
+        }
+        else if (screenSide == ScreenSide.Right && coll.transform.position.x < colliderHalfWidth * 2 + transform.position.x)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

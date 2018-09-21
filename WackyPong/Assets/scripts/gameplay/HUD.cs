@@ -7,9 +7,9 @@ public class HUD : MonoBehaviour
 {
     // Text change support
     [SerializeField]
-    GameObject leftTextBox;
+    Text leftText;
     [SerializeField]
-    GameObject rightTextBox;
+    Text rightText;
     [SerializeField]
     Text scoreText;
 
@@ -20,27 +20,27 @@ public class HUD : MonoBehaviour
     {
         paddle = GetComponent<Paddle>();
 
-        Text leftText = leftTextBox.GetComponent<Text>();
+        //Text leftText = leftTextBox.GetComponent<Text>();
 
-        //// Changes HUD text to include hit count
-        //static leftText.text = "Left Hit Count: " ;
-        //rightText.text = "Right Hit Count: ";
-	}
+        // Changes HUD text to include hit count
+        leftText.text = "Left Hit Count: ";
+        rightText.text = "Right Hit Count: ";
+    }
 
-    //static void AddHits(ScreenSide side)
-    //{
-    //    if (side == ScreenSide.Left)
-    //    {
-    //        leftText.text = "Left Hit Count: " + hits;
-    //    }
-    //    if (side == ScreenSide.Right)
-    //    {
-    //        rightText.text = "Right Hit Count: " + hits;
-    //    }
-    //}
-	
-	// Update is called once per frame
-	void Update ()
+    void AddHits(ScreenSide side)
+    {
+        if (side == ScreenSide.Left)
+        {
+            leftText.text = "Left Hit Count: " + hits;
+        }
+        if (side == ScreenSide.Right)
+        {
+            rightText.text = "Right Hit Count: " + hits;
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}
