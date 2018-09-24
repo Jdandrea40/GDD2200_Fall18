@@ -9,11 +9,10 @@ public class Paddle : MonoBehaviour
 {
     // Saved for efficiency
     Rigidbody2D rb2d;
-    HUD hud;
 
     // Gets Enumeration
     [SerializeField]
-    static ScreenSide screenSide;
+    ScreenSide screenSide;
 
     // Box Collider Support
     BoxCollider2D bc2d;
@@ -28,24 +27,19 @@ public class Paddle : MonoBehaviour
     /// Use this for initialization
     /// </summary>
     void Start()
-	{
+    {
         // Gets Rigidbody2D compnent
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        
+
         // Gets BoxCollider2D component
         bc2d = GetComponent<BoxCollider2D>();
-
-        // Gets HUD Component
-        hud = GetComponent<HUD>();
-
-
 
         // Get half bc2d height
         colliderHalfHeight = bc2d.size.y / 2;
         colliderHalfWidth = bc2d.size.x / 2;
 
-	}
-    
+    }
+
     /// <summary>
     /// Called 50 times per second
     /// </summary>
@@ -56,7 +50,7 @@ public class Paddle : MonoBehaviour
         float rightPaddleInput = Input.GetAxisRaw("RightPaddle");
 
         // Handles input and movement of Left Paddle
-        if(leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle"))
+        if (leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle"))
         {
             Vector2 position = rb2d.position;
             position.y += leftPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
@@ -66,15 +60,15 @@ public class Paddle : MonoBehaviour
         }
 
         // Handles input and movement of Right Paddle
-        if(rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle"))
+        if (rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle"))
         {
             Vector2 position = rb2d.position;
             position.y += rightPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
             position.y = CalculateClampedY(position.y);
-            
+
             rb2d.MovePosition(position);
         }
-    }	
+    }
 
     /// <summary>
     /// Keeps paddle in playfield by calculating new y position
@@ -102,8 +96,10 @@ public class Paddle : MonoBehaviour
     /// <param name="coll">collision info</param>
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Ball") && FrontHitCollision(coll) == true)
+
+        if (coll.gameObject.CompareTag("Ball") && FrontHitCollision(coll)) 
         {
+            
             // calculate new ball direction
             float ballOffsetFromPaddleCenter =
                 coll.transform.position.y - transform.position.y;
@@ -116,12 +112,15 @@ public class Paddle : MonoBehaviour
             if (screenSide == ScreenSide.Left)
             {
                 angle = angleOffset;
-            }
+            }           
             else
             {
                 angle = (float)(Mathf.PI - angleOffset);
             }
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+            // Adds hits score to appropriate player side
+            HUD.AddHits(screenSide, Ball.Hits);
 
             // tell ball to set direction to new direction
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
@@ -129,19 +128,21 @@ public class Paddle : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for a proper Front Collision
+    /// </summary>
+    /// <param name="coll"></param>
+    /// <returns></returns>
     bool FrontHitCollision(Collision2D coll)
     {
-        if (screenSide == ScreenSide.Left && coll.transform.position.x > colliderHalfWidth * 2 + transform.position.x)
-        {
-            return true;
-        }
-        else if (screenSide == ScreenSide.Right && coll.transform.position.x < colliderHalfWidth * 2 + transform.position.x)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        // Tolerance allowed for proper collision
+        const float tolerance = 0.05f;
+
+        // Gets the contact points of the ball
+        ContactPoint2D contactPoint1 = coll.GetContact(0);
+        ContactPoint2D contactPoint2 = coll.GetContact(1);
+
+        // returns the value on collison
+        return Mathf.Abs(contactPoint1.point.x - contactPoint2.point.x) < tolerance;
     }
 }

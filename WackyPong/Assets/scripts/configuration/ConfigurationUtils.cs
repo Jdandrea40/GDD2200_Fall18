@@ -23,10 +23,27 @@ public static class ConfigurationUtils
         get { return configurationData.PaddleMoveUnitsPerSecond; }
     }
 
-    // Gets ball impulse force
+    /// <summary>
+    /// Gets the standard ball hit amount
+    /// </summary>
     public static float BallImpulseForce
     {
         get { return configurationData.BallImpulseForce; }
+    }
+    /// <summary>
+    /// Gets the standard ball hit amount
+    /// </summary>
+    public static int StandardBallHit
+    {
+        get { return configurationData.StandardBallHit; }
+    }
+
+    /// <summary>
+    /// Gets the Ball Lifetime Amount
+    /// </summary>
+    public static float BallLifetime
+    {
+        get { return configurationData.BallLifeTime; }
     }
 
     #endregion

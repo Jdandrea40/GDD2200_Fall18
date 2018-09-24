@@ -16,6 +16,8 @@ public class ConfigurationData
     // configuration data
     static float paddleMoveUnitsPerSecond = 10;
     static float ballImpulseForce = 5;
+    static int standardBallHit = 1;
+    static float ballLifeTime = 10;
 
     #endregion
 
@@ -37,6 +39,24 @@ public class ConfigurationData
     public float BallImpulseForce
     {
         get { return ballImpulseForce; }
+    }
+
+    /// <summary>
+    /// Gets the standard ball hit amount
+    /// </summary>
+    /// <value>standard ball hit</value>
+    public int StandardBallHit
+    {
+        get { return standardBallHit; }
+    }
+
+    /// <summary>
+    /// Gets the ball Lifetime
+    /// </summary>
+    /// <value>ball lifetime</value>
+    public float BallLifeTime
+    {
+        get { return ballLifeTime; }
     }
 
     #endregion
@@ -97,6 +117,8 @@ public class ConfigurationData
         // Parses strings to approprite data types
         ballImpulseForce = float.Parse(values[0]);
         paddleMoveUnitsPerSecond = float.Parse(values[1]);
+        standardBallHit = int.Parse(values[2]);
+        ballLifeTime = float.Parse(values[3]);
 
     }
 
