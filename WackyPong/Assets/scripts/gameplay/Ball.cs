@@ -125,18 +125,18 @@ public class Ball : MonoBehaviour
     private void OnBecameInvisible()
     {
         // Regulates scoring
-        if (gameObject.transform.position.x > ScreenUtils.ScreenLeft && !deathTimer.Finished)
+        if ((Camera.main.WorldToViewportPoint(transform.position).x > 1 ||
+            Camera.main.WorldToViewportPoint(transform.position).x < 0) && !deathTimer.Finished)
         {
-            HUD.AddScore(ScreenSide.Right, Ball.Score);
-        }
-        else if (gameObject.transform.position.x < ScreenUtils.ScreenRight && !deathTimer.Finished)
-        {
-            HUD.AddScore(ScreenSide.Left, Ball.Score);
-        }
-        // Destroys ball if outside screen bounds
-        if (gameObject.transform.position.x > ScreenUtils.ScreenLeft || 
-            gameObject.transform.position.x < ScreenUtils.ScreenRight)
-        {
+            if (rb2d.velocity.x > 0)
+            {
+                HUD.AddScore(ScreenSide.Left, Ball.Score);
+            }
+            else if (rb2d.velocity.x < 0)
+            {
+                HUD.AddScore(ScreenSide.Right, Ball.Score);
+            }
+
             // checks for whether death timer is 
             // reason for destruction
             if (!deathTimer.Finished)
@@ -144,7 +144,11 @@ public class Ball : MonoBehaviour
                 ballSpawner.SpawnBall();
                 deathTimer.Stop();
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+
+
+       
+
     }
 }

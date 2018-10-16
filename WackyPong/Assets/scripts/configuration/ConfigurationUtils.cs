@@ -46,6 +46,19 @@ public static class ConfigurationUtils
         get { return configurationData.BallLifeTime; }
     }
 
+    /// <summary>
+    /// Gets minimum spawn time
+    /// </summary>
+    public static float MinBallSpawnTime
+    {
+        get { return configurationData.MinBallSpawnTime; }
+    }
+
+    // Gets maximum soawn time
+    public static float MaxBallSpawnTime
+    {
+        get { return configurationData.MaxBallSpawnTime; }
+    }
     #endregion
 
     /// <summary>

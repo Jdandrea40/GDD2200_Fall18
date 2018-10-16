@@ -71,7 +71,7 @@ public class HUD : MonoBehaviour
     public static void AddScore(ScreenSide side, int score)
     {
         // Right side scoring
-        if (side > ScreenSide.Left)
+        if (side == ScreenSide.Left)
         {
             p1Score += score;
             scoreText.text = p1Score + " - " + p2Score;
