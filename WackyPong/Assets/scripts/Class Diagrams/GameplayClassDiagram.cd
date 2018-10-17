@@ -1,67 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Ball">
-    <Position X="0.75" Y="2.25" Width="1.5" />
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <AssociationLine Name="deathTimer" Type="Timer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="4.75" />
+        <Point X="4.5" Y="4.645" />
+        <Point X="4.5" Y="3.788" />
+        <Point X="5" Y="3.788" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="startTimer" Type="Timer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.672" Y="4.75" />
+        <Point X="4.672" Y="4.357" />
+        <Point X="5.688" Y="4.357" />
+        <Point X="5.688" Y="3.982" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAYAAAAAACAAIEgAAAIABAABAAYAAAECAACAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\gameplay\Ball.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ballSpawner" />
+      <Field Name="deathTimer" />
+      <Field Name="startTimer" />
+      <Field Name="screenSide" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Paddle">
-    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIgwAAAAiAAAEAAAAAAQAAAAAAAAAAAAAAgAgBAAgA=</HashCode>
       <FileName>Assets\scripts\gameplay\Paddle.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="screenSide" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="BallSpawner">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAACAAEgAAAAABAAAACAAAAAEAAAUAAAAQAAA=</HashCode>
       <FileName>Assets\scripts\gameplay\BallSpawner.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="spawnTimer" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Timer">
-    <Position X="0.75" Y="4" Width="2" />
+    <Position X="5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAEAAAAAACAAAAAAQAAgAAAAgAAAAIAAAAAAEAAAI=</HashCode>
+      <HashCode>AAQAEAAAAAACAAAAAAQAAgAAAAgAAAAIIAAAAAEAAAI=</HashCode>
       <FileName>Assets\scripts\gameplay\Timer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameplayManager">
-    <Position X="4.75" Y="0.5" Width="1.75" />
+    <Position X="11.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\gameplay\GameplayManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameInitializer">
-    <Position X="4.75" Y="2.25" Width="1.5" />
+    <Position X="11" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\scripts\util\GameInitializer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ScreenUtils">
-    <Position X="4.75" Y="3.75" Width="2.25" />
+    <Position X="8.25" Y="5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAgAACECAAAQAAAAAAAAACACAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Assets\scripts\util\ScreenUtils.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConfigurationUtils">
-    <Position X="7.75" Y="0.5" Width="3" />
+    <Position X="11" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAABAAAACAIQAABAAAAAAEAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\configuration\ConfigurationUtils.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConfigurationData">
-    <Position X="7.75" Y="2.5" Width="3" />
+    <Position X="7.75" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>EAAAABACAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAhACAECAIAAABCAAAAAEABAAAAAQAAAAAIAEAAA=</HashCode>
       <FileName>Assets\scripts\configuration\ConfigurationData.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="HUD">
+    <Position X="6" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAIACQAAQAAAAABAkQAAAAAAAEBAAAEAAAAAQA=</HashCode>
+      <FileName>Assets\scripts\gameplay\HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ScreenSide" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\ScreenSide.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PickUpType">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACEAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PickUpType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
