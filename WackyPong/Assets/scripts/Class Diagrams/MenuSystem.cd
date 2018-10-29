@@ -1,31 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DifficultyMenu" Collapsed="true">
-    <Position X="0.75" Y="0.5" Width="1.5" />
+  <Class Name="DifficultyMenu">
+    <Position X="2.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAACABQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\Menus\DifficultyMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainMenu" Collapsed="true">
-    <Position X="3.75" Y="0.5" Width="1.5" />
+  <Class Name="MainMenu">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <InheritanceLine Type="MenuManager" FixedFromPoint="true">
+      <Path>
+        <Point X="4.25" Y="2.117" />
+        <Point X="4.25" Y="3.125" />
+        <Point X="7.25" Y="3.125" />
+        <Point X="7.25" Y="3.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\Menus\MainMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OptionsMenu" Collapsed="true">
-    <Position X="3.75" Y="1.75" Width="1.5" />
+  <Class Name="OptionsMenu">
+    <Position X="4.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\Menus\OptionsMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PauseMenu" Collapsed="true">
-    <Position X="0.75" Y="1.75" Width="1.5" />
+  <Class Name="PauseMenu">
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAgAACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\Menus\PauseMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuManager">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Menus\MenuManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

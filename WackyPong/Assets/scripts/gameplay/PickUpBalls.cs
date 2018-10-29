@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PickUpBalls : Ball
 {
-    PickUpEffects pickUpEffects;
+    PickUpEffectsEnum pickUpEffects;
+
+    PickUpEffects pickupCollected;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+       pickupCollected = pickupCollected.GetComponent<PickUpEffects>();
 		
 	}
 	

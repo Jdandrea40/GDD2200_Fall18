@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : MenuManager {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,14 @@ public class PauseMenu : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void PauseGame()
+    {
+
+    }
+
+    void UnPauseGame()
+    {
+
+    }
 }

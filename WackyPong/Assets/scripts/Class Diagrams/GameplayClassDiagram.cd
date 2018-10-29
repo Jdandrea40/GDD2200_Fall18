@@ -57,14 +57,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GameplayManager">
-    <Position X="11.25" Y="3.75" Width="1.75" />
+    <Position X="11" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\gameplay\GameplayManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameInitializer">
-    <Position X="13.5" Y="3.75" Width="1.5" />
+    <Position X="13" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\scripts\util\GameInitializer.cs</FileName>
@@ -103,13 +103,36 @@
   </Class>
   <Class Name="PickUpBalls">
     <Position X="0.5" Y="5.5" Width="1.5" />
+    <AssociationLine Name="pickUpEffects" Type="PickUpEffectsEnum">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.513" Y="0.381" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAACCAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\scripts\gameplay\PickUpBalls.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Field Name="pickupCollected" />
       <Field Name="pickUpEffects" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="PickUpEffects">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAACAAAAAAAAAAAAAAAAAAAAAEAAAAAgAEAAA=</HashCode>
+      <FileName>Assets\scripts\gameplay\PickUpEffects.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pickUpEffect" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MenuManager">
+    <Position X="11" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Menus\MenuManager.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Enum Name="ScreenSide" Collapsed="true">
     <Position X="0.5" Y="4.75" Width="1.5" />
@@ -118,11 +141,11 @@
       <FileName>Assets\scripts\Enumerations\ScreenSide.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="PickUpEffects">
-    <Position X="0.5" Y="7.5" Width="1.5" />
+  <Enum Name="PickUpEffectsEnum">
+    <Position X="3" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAA=</HashCode>
-      <FileName>Assets\scripts\Enumerations\PickUpEffects.cs</FileName>
+      <FileName>Assets\scripts\Enumerations\PickUpEffectsEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

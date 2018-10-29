@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MenuManager {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,5 @@ public class MainMenu : MonoBehaviour {
 	void Update () {
 		
 	}
+
 }
