@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionsMenu : MenuManager {
+public class OptionsMenu : MonoBehaviour
+{
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +14,10 @@ public class OptionsMenu : MenuManager {
 	void Update () {
 		
 	}
+
+    // returns to main menu
+    void ReturnToMainMenu()
+    {
+
+    }
 }

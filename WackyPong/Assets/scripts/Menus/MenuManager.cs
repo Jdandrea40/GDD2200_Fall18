@@ -18,7 +18,18 @@ public class MenuManager : MonoBehaviour
 	}
     
     // Used to traverse Menu System
-    void GoToMenu()
+    void OpenHelpMenu()
+    {
+
+    }
+
+    // starts single play
+    void GoToDifficultyMenu()
+    {
+
+    }
+
+    void GoToPauseMenu()
     {
 
     }

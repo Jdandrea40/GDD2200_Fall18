@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DifficultyMenu : MenuManager
+public class DifficultyMenu : MonoBehaviour
 {
-    bool twoPlayers;
 
 	// Use this for initialization
 	void Start () {
@@ -16,13 +15,15 @@ public class DifficultyMenu : MenuManager
 		
 	}
 
-    void SinglePlayerStart()
+    // start singleplayer
+    void StartSinglePlay()
     {
 
     }
 
-    void TwoPlayerStart()
+    // start two player
+    void StartTwoPlayers()
     {
-        twoPlayers = true;
+
     }
 }

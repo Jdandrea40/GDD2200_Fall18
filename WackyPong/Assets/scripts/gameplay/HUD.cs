@@ -84,6 +84,11 @@ public class HUD : MonoBehaviour
         }
     }
 
+    void CalculateScore(ScreenSide side, int score)
+    {
+
+    }
+
     // Update is called once per frame
     void Update ()
     {

@@ -76,6 +76,7 @@
     <Compile Include="Assets\scripts\Menus\DifficultyMenu.cs" />
     <Compile Include="Assets\scripts\Menus\MainMenu.cs" />
     <Compile Include="Assets\scripts\Menus\MenuManager.cs" />
+    <Compile Include="Assets\scripts\Menus\MenuNames.cs" />
     <Compile Include="Assets\scripts\Menus\OptionsMenu.cs" />
     <Compile Include="Assets\scripts\Menus\PauseMenu.cs" />
     <Compile Include="Assets\scripts\util\GameInitializer.cs" />

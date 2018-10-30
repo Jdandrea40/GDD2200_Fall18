@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseMenu : MenuManager {
+public class PauseMenu : MonoBehaviour
+{
 
 	// Use this for initialization
 	void Start () {
@@ -14,12 +15,20 @@ public class PauseMenu : MenuManager {
 		
 	}
 
+    // pauses the game
     void PauseGame()
     {
 
     }
 
+    // unpauses the game
     void UnPauseGame()
+    {
+
+    }
+
+    // quits the game
+    void QuitGame()
     {
 
     }

@@ -146,9 +146,13 @@ public class Ball : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
 
-
-       
+    void PickUpEffect()
+    {
 
     }
+       
+
+    
 }
