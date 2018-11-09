@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    MenuManager menuManager;
+    MenuName menuName;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    private void Start()
+    {
+        menuManager = Camera.main.GetComponent<MenuManager>();
+    }
+    /// <summary>
+    /// Quits the game
+    /// </summary>
+    public void QuitGame()
+    {
+        menuManager.GoToMenu(MenuName.QuitGame);
+    }
 }
+
+
