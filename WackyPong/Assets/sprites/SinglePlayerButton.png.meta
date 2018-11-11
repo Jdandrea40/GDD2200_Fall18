@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: b567f7c8e0c0dfb48865bbe41f2a9f95
+guid: cc24fa240a483ec4a92e4407153dee7b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Button_0
-    21300002: Button_1
-    21300004: Button_2
-    21300006: Button_3
+    21300000: SinglePlayerButton_0
+    21300002: SinglePlayerButton_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,13 +86,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button_0
+      name: SinglePlayerButton_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 471
-        height: 237
+        x: 23
+        y: 24
+        width: 441
+        height: 201
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -102,19 +100,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94f32eecb2dfdd142a83ed283090bb1c
+      spriteID: 2482c1c2a169e624e9de3d25ffa7638d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_1
+      name: SinglePlayerButton_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 231
-        width: 21
-        height: 9
+        x: 515
+        y: 26
+        width: 445
+        height: 201
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,47 +120,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75290c514d977de4a9f485c8ba47f7c9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_2
-      rect:
-        serializedVersion: 2
-        x: 487
-        y: 0
-        width: 473
-        height: 238
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65c9f61c0a2c87b488bcf8539fcd6434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_3
-      rect:
-        serializedVersion: 2
-        x: 479
-        y: 120
-        width: 4
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8eb9cce6b7699964dac9d5b79e28c2ac
+      spriteID: d051aa9a4f46fa048b933d75c35a9b39
       vertices: []
       indices: 
       edges: []
@@ -170,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8b20f9a6fcfb796459463248ab8e164b
+    spriteID: 982160a606f8f914aa128f945d03c680
     vertices: []
     indices: 
     edges: []

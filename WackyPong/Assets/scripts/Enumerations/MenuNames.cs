@@ -4,10 +4,10 @@ using UnityEngine;
 
     public enum MenuName
     {
-        DifficultyMenu,
         HelpMenu,
         MainMenu,
-        OptionsMenu,
-        QuitGame
+        PauseGame,
+        QuitGame,
+        PlayGame
     }
 

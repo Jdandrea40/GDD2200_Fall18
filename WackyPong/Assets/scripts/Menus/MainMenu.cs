@@ -11,6 +11,39 @@ public class MainMenu : MonoBehaviour
     {
         menuManager = Camera.main.GetComponent<MenuManager>();
     }
+    
+    /// <summary>
+    /// Starts the Game
+    /// </summary>
+    public void PlayGame()
+    {
+        menuManager.GoToMenu(MenuName.PlayGame);
+    }
+
+    /// <summary>
+    /// Goes to Help Menu
+    /// </summary>
+    public void HelpMenu()
+    {
+        menuManager.GoToMenu(MenuName.HelpMenu);
+    }
+
+    /// <summary>
+    /// Pauses and Resumes the game
+    /// </summary>
+    public void PauseGame()
+    {
+        menuManager.GoToMenu(MenuName.PauseGame);
+    }
+
+    /// <summary>
+    /// Goes to Main Menu
+    /// </summary>
+    public void GoToMain()
+    {
+        menuManager.GoToMenu(MenuName.MainMenu);
+    }
+
     /// <summary>
     /// Quits the game
     /// </summary>

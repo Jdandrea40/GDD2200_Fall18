@@ -20,10 +20,8 @@ public class GameplayManager : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
+
 		
 	}
-    void GoToMenu()
-    {
 
-    }
 }
