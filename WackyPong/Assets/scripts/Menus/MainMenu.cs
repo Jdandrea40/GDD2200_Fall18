@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    MenuManager menuManager;
     MenuName menuName;
 
-    private void Start()
-    {
-        menuManager = Camera.main.GetComponent<MenuManager>();
-    }
-    
     /// <summary>
     /// Starts the Game
     /// </summary>
     public void PlayGame()
     {
-        menuManager.GoToMenu(MenuName.PlayGame);
+        MenuManager.GoToMenu(MenuName.PlayGame);
     }
 
     /// <summary>
@@ -25,7 +19,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void HelpMenu()
     {
-        menuManager.GoToMenu(MenuName.HelpMenu);
+        MenuManager.GoToMenu(MenuName.HelpMenu);
     }
 
     /// <summary>
@@ -33,7 +27,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        menuManager.GoToMenu(MenuName.PauseGame);
+        MenuManager.GoToMenu(MenuName.PauseGame);
     }
 
     /// <summary>
@@ -41,7 +35,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void GoToMain()
     {
-        menuManager.GoToMenu(MenuName.MainMenu);
+        MenuManager.GoToMenu(MenuName.MainMenu);
     }
 
     /// <summary>
@@ -49,7 +43,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
-        menuManager.GoToMenu(MenuName.QuitGame);
+        MenuManager.GoToMenu(MenuName.QuitGame);
     }
 }
 

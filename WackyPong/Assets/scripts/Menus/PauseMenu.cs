@@ -6,8 +6,10 @@ public class PauseMenu : MonoBehaviour
 {
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        // Freezes the Game
+        Time.timeScale = 0;		
 	}
 	
 	// Update is called once per frame
@@ -21,15 +23,25 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    // unpauses the game
-    void UnPauseGame()
+    // Unpauses the game
+   public void UnPauseGame()
     {
-
+        // Unfreezes and then destorys the Pause Menu
+        Time.timeScale = 1;
+        Destroy(gameObject);
     }
 
-    // quits the game
-    void QuitGame()
+    // Quits the game and returns to Main Menu
+    public void QuitGame()
     {
+        // Unfreezes the game when quit
+        Time.timeScale = 1;
+
+        // Destroys the Pause Menu prefab
+        Destroy(gameObject);
+
+        // Goes to main menu via the Menu Manager
+        MenuManager.GoToMenu(MenuName.MainMenu);
 
     }
 }

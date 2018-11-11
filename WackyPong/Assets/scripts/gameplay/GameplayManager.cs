@@ -20,7 +20,12 @@ public class GameplayManager : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
-
+        // Checks for Escape Key in order to pause the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Pauses game via Menu Manager
+            MenuManager.GoToMenu(MenuName.PauseGame);
+        }
 		
 	}
 

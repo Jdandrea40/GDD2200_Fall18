@@ -3,24 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public static class MenuManager
 {
-
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
     /// <summary>
     /// Menu Navigation method
     /// </summary>
-    public void GoToMenu(MenuName menuNames)
+    public static void GoToMenu(MenuName menuNames)
     {
         switch (menuNames)
         {
@@ -36,20 +24,17 @@ public class MenuManager : MonoBehaviour
                 }
             case MenuName.PauseGame:
                 {
-                    if (Time.timeScale == 1)
-                    {
-                        Time.timeScale = 0;
-                    }
-                    else
-                    {
-                        Time.timeScale = 1;
-                    }
+                    // Instantiates the Pause Menu via the Resources Folder in Unity
+                    Object.Instantiate(Resources.Load("PauseMenu"));
 
                     break;
                 }
             case MenuName.QuitGame:
                 {
+                    // Quits the game (Build Only)
                     Application.Quit();
+
+                    // Console Print for testing
                     Debug.Log("The game has been closed LOSER!");
 
                     break;
@@ -60,22 +45,5 @@ public class MenuManager : MonoBehaviour
                     break;
                 }
         }
-    }
-    
-    // Used to traverse Menu System
-    void OpenHelpMenu()
-    {
-
-    }
-
-    // starts single play
-    void GoToDifficultyMenu()
-    {
-
-    }
-
-    void GoToPauseMenu()
-    {
-
     }
 }

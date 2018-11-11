@@ -13,6 +13,12 @@ public class HUD : MonoBehaviour
     [SerializeField]
     GameObject scoreTextDisplay;
 
+
+    // Pause Menu Support
+    [SerializeField]
+    GameObject pauseMenu;
+
+
     // string change support
     static Text leftTextHits;
     static int leftHits = 0;
@@ -29,6 +35,12 @@ public class HUD : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        // Resets Scores on Start
+        p1Score = 0;
+        p2Score = 0;
+        leftHits = 0;
+        rightHits = 0;
+
         // Gets Text Component
         leftTextHits = leftTextDisplay.GetComponent<Text>();
         rightTextHits = rightTextDisplay.GetComponent<Text>();
@@ -36,8 +48,8 @@ public class HUD : MonoBehaviour
 
 
         // Changes HUD text to include hit count
-        leftTextHits.text = "Left Hit Count: " + leftHits;
-        rightTextHits.text = "Right Hit Count: " + rightHits;
+        leftTextHits.text = "Facts Checked (Left): " + leftHits;
+        rightTextHits.text = "Facts Checked (Right): " + rightHits;
         scoreText.text = p1Score + " - " + p2Score;
 
     }
@@ -53,13 +65,13 @@ public class HUD : MonoBehaviour
         if (side == ScreenSide.Left)
         {
             leftHits += hits;
-            leftTextHits.text = "Left Hit Count: " + leftHits;
+            leftTextHits.text = "Facts Checked (Left): " + leftHits;
         }
         // Right side scoring
         else
         {
             rightHits += hits;
-            rightTextHits.text = "Right Hit Count: " + rightHits;
+            rightTextHits.text = "Facts Checked (Right) " + rightHits;
         }
     }
 
@@ -88,10 +100,4 @@ public class HUD : MonoBehaviour
     {
 
     }
-
-    // Update is called once per frame
-    void Update ()
-    {
-		
-	}
 }

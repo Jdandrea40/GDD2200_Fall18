@@ -343,7 +343,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 802593418}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1032526386}
+        m_MethodName: GoToMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &802593418
@@ -392,6 +403,7 @@ GameObject:
   - component: {fileID: 1032526384}
   - component: {fileID: 1032526383}
   - component: {fileID: 1032526386}
+  - component: {fileID: 1032526387}
   m_Layer: 0
   m_Name: HelpMenu
   m_TagString: Untagged
@@ -477,6 +489,17 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1032526386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1032526381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214752cff96da8843b66f541e4c29396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1032526387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

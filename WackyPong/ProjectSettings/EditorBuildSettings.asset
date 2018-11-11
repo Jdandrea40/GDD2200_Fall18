@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/scenes/main menu.unity
     guid: 3c81d1ed3d308c34a95fe1bb3ff82e91
   - enabled: 1
+    path: Assets/scenes/help menu.unity
+    guid: e25dcb1d0d2c722428ba2adc094381e1
+  - enabled: 1
     path: Assets/scenes/gameplay.unity
     guid: 0ffe1dc9d97b6c246acdce7ec59cd35b
   m_configObjects: {}
