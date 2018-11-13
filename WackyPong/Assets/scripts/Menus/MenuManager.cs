@@ -10,16 +10,19 @@ public static class MenuManager
     /// </summary>
     public static void GoToMenu(MenuName menuNames)
     {
+        // Chooses case based on the Menu Name Enumerations
         switch (menuNames)
         {
             case MenuName.HelpMenu:
                 {
                     SceneManager.LoadScene("help menu");
+
                     break;
                 }
             case MenuName.MainMenu:
                 {
                     SceneManager.LoadScene("main menu");
+
                     break;
                 }
             case MenuName.PauseGame:
@@ -42,6 +45,7 @@ public static class MenuManager
             case MenuName.PlayGame:
                 {
                     SceneManager.LoadScene("gameplay");
+
                     break;
                 }
         }

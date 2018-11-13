@@ -23,7 +23,9 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    // Unpauses the game
+   /// <summary>
+   /// Unpauses the game
+   /// </summary>
    public void UnPauseGame()
     {
         // Unfreezes and then destorys the Pause Menu
@@ -31,7 +33,9 @@ public class PauseMenu : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Quits the game and returns to Main Menu
+    /// <summary>
+    /// Quits the Game and returns to Main Menu
+    /// </summary>
     public void QuitGame()
     {
         // Unfreezes the game when quit
