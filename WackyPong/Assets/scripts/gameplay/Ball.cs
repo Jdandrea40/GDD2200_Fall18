@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// A ball
@@ -9,10 +10,6 @@ public class Ball : MonoBehaviour
 {
     // saved for efficiency
     Rigidbody2D rb2d;
-
-    // Timer support
-    Timer deathTimer;
-    Timer startTimer;
 
     // angle support
     float maxAngle;         // maximum angle allowed
@@ -23,6 +20,11 @@ public class Ball : MonoBehaviour
 
     BallSpawner ballSpawner;
     Vector2 direction;
+
+    // Event Manager Support
+    PointsAddedEvent pointsAddedEvent;
+    BallLostEvent ballLostEvent;
+    BallDiedEvent ballDiedEvent;
 
     #region Properties
     /// <summary>
@@ -49,17 +51,29 @@ public class Ball : MonoBehaviour
 	{
         // gets Rigidbody2D Componenet
         rb2d = GetComponent<Rigidbody2D>();
-        
+
+        // Initializes Events 
+        pointsAddedEvent = new PointsAddedEvent();
+        ballLostEvent = new BallLostEvent();
+        ballDiedEvent = new BallDiedEvent();
+
+        // Adds appropriate invokers to the ball
+        EventManager.AddPointsAddedInvoker(this);
+        EventManager.BallLostInvoker(this);
+        EventManager.BallDiedInvoker(this);
+
         // Angle selection support
         float angleSelect = Random.value;
 
-        // Death Timer
+        // Death Timer (with invoker)
         deathTimer = gameObject.AddComponent<Timer>();
+        deathTimer.AddTimerFinishedListener(BallDeathTimer);
         deathTimer.Duration = ConfigurationUtils.BallLifetime;
         deathTimer.Run();
 
-        // Start Timer
+        // Start Timer (with invoker)
         startTimer = gameObject.AddComponent<Timer>();
+        startTimer.AddTimerFinishedListener(BallStartTimer);
         startTimer.Duration = 1;
         startTimer.Run();
 
@@ -88,24 +102,46 @@ public class Ball : MonoBehaviour
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 	
-	/// <summary>
-	/// Update is called once per frame
-	/// </summary>
-	void Update()
-	{
-        // End of DeathTimer Support
-        if (deathTimer.Finished)
-        {
-            ballSpawner.SpawnBall();
-            Destroy(gameObject);
-        }
-        if (startTimer.Finished)
-        {
-            // stops timer
-            startTimer.Stop();
-            /// Adds a force and direction to the ball
-            rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
-        }
+    /// <summary>
+    /// Ball Death timer Event Method
+    /// </summary>
+    void BallDeathTimer()
+    {
+        Destroy(gameObject);
+        ballDiedEvent.Invoke();
+    }
+
+    /// <summary>
+    /// Ball start event method
+    /// </summary>
+    void BallStartTimer()
+    {
+        rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
+    }
+
+    /// <summary>
+    /// Adds listener to increment score to appropriate side
+    /// </summary>
+    public void AddPointsAddedListener(UnityAction<ScreenSide, int> listener)
+    {
+        pointsAddedEvent.AddListener(listener);
+    }
+    /// <summary>
+    /// listener for lost ball
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddBallLostListener(UnityAction listener)
+    {
+        ballLostEvent.AddListener(listener);
+    }
+
+    /// <summary>
+    /// listener for dead ball
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddBallDiedListener(UnityAction listener)
+    {
+        ballDiedEvent.AddListener(listener);
     }
 
     /// <summary>
@@ -126,22 +162,21 @@ public class Ball : MonoBehaviour
     {
         // Regulates scoring
         if ((Camera.main.WorldToViewportPoint(transform.position).x > 1 ||
-            Camera.main.WorldToViewportPoint(transform.position).x < 0) && !deathTimer.Finished)
+            Camera.main.WorldToViewportPoint(transform.position).x < 0))
         {
+            // Checks for screen side to apply appropriate scoring
+            // Ball goes off Right --- Scores + for Left
             if (rb2d.velocity.x > 0)
             {
-                HUD.AddScore(ScreenSide.Left, Ball.Score);
+                pointsAddedEvent.Invoke(ScreenSide.Left, Ball.Score);
+                ballLostEvent.Invoke();
+                deathTimer.Stop();
             }
+            // Ball goes off Left --- Score + for Right
             else if (rb2d.velocity.x < 0)
             {
-                HUD.AddScore(ScreenSide.Right, Ball.Score);
-            }
-
-            // checks for whether death timer is 
-            // reason for destruction
-            if (!deathTimer.Finished)
-            {
-                ballSpawner.SpawnBall();
+                pointsAddedEvent.Invoke(ScreenSide.Right, Ball.Score);
+                ballLostEvent.Invoke();
                 deathTimer.Stop();
             }
             Destroy(gameObject);
@@ -152,7 +187,5 @@ public class Ball : MonoBehaviour
     {
 
     }
-       
 
-    
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// A paddle
@@ -21,7 +22,9 @@ public class Paddle : MonoBehaviour
 
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;      // const value saved for paddle bounce
 
-    BoxCollider2D ballColl;
+    BoxCollider2D ballColl;                                     // ball collider support
+
+    HitsAddedEvent hitsAddedEvent;                              // Event Manager Support
 
     /// <summary>
     /// Use this for initialization
@@ -38,6 +41,9 @@ public class Paddle : MonoBehaviour
         colliderHalfHeight = bc2d.size.y / 2;
         colliderHalfWidth = bc2d.size.x / 2;
 
+        // Support for event manager system
+        hitsAddedEvent = new HitsAddedEvent();
+        EventManager.AddPointsInvoker(this);
     }
 
     /// <summary>
@@ -120,12 +126,18 @@ public class Paddle : MonoBehaviour
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             // Adds hits score to appropriate player side
-            HUD.AddHits(screenSide, Ball.Hits);
+            hitsAddedEvent.Invoke(screenSide, Ball.Hits);
 
             // tell ball to set direction to new direction
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
             ballScript.SetDirection(direction);
         }
+    }
+
+    // Adds a listener to the paddle for Hits Calculations
+    public void AddHitsAddedListener(UnityAction<ScreenSide,int> listener)
+    {
+        hitsAddedEvent.AddListener(listener);
     }
 
     /// <summary>

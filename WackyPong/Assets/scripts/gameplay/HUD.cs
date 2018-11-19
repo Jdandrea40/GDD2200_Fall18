@@ -35,6 +35,10 @@ public class HUD : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        // Adds appropriate listeners
+        EventManager.AddPointsAddedListener(AddScore);
+        EventManager.AddHitsListener(AddHits);
+
         // Resets Scores on Start
         p1Score = 0;
         p2Score = 0;
@@ -59,8 +63,9 @@ public class HUD : MonoBehaviour
     /// </summary>
     /// <param name="side"></param>
     /// <param name="hits"></param>
-    public static void AddHits(ScreenSide side, int hits)
+    void AddHits(ScreenSide side, int hits)
     {
+
         // Ledt Side scoring
         if (side == ScreenSide.Left)
         {
@@ -80,8 +85,9 @@ public class HUD : MonoBehaviour
     /// </summary>
     /// <param name="side"></param>
     /// <param name="score"></param>
-    public static void AddScore(ScreenSide side, int score)
+    void AddScore(ScreenSide side, int score)
     {
+
         // Right side scoring
         if (side == ScreenSide.Left)
         {
