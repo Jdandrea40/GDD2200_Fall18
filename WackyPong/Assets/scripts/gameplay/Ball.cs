@@ -21,6 +21,9 @@ public class Ball : MonoBehaviour
     BallSpawner ballSpawner;
     Vector2 direction;
 
+    Timer deathTimer;
+    Timer startTimer;
+
     // Event Manager Support
     PointsAddedEvent pointsAddedEvent;
     BallLostEvent ballLostEvent;
@@ -66,12 +69,14 @@ public class Ball : MonoBehaviour
         float angleSelect = Random.value;
 
         // Death Timer (with invoker)
+
         deathTimer = gameObject.AddComponent<Timer>();
         deathTimer.AddTimerFinishedListener(BallDeathTimer);
         deathTimer.Duration = ConfigurationUtils.BallLifetime;
         deathTimer.Run();
 
         // Start Timer (with invoker)
+
         startTimer = gameObject.AddComponent<Timer>();
         startTimer.AddTimerFinishedListener(BallStartTimer);
         startTimer.Duration = 1;
