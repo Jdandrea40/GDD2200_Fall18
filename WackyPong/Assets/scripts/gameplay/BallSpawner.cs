@@ -15,7 +15,7 @@ public class BallSpawner : MonoBehaviour
     [SerializeField]
     GameObject freezerEffect;
     [SerializeField]
-    GameObject pickUpEffect;
+    GameObject speedUpEffect;
 
 
     // spawn timer support
@@ -74,7 +74,27 @@ public class BallSpawner : MonoBehaviour
         }
         else
         {
-            Instantiate(standardBall);
+            if (Random.value > 0.4f)
+            {
+                Instantiate(standardBall);
+            }
+            else if (Random.value > 0.8f )
+            {
+                Instantiate(bonusBall);
+            }
+            else
+            {
+                int pickUpType = Random.Range(0, 2);
+                if (pickUpType < .5)
+                {
+                    Instantiate(freezerEffect);
+                }
+                else
+                {
+                    Instantiate(speedUpEffect);
+                }
+            }
+            
         }
 
     }

@@ -125,7 +125,7 @@ public class Ball : MonoBehaviour
             score = BonusBallScore;
             hits = BonusBallHits;
         }
-        else if (ballType == PickUpEffectsEnum.StandardBall)
+        else if (ballType == PickUpEffectsEnum.StandardBall || ballType == PickUpEffectsEnum.FreezerEffect || ballType == PickUpEffectsEnum.SpeedUpEffect)
         {
             score = StandardBallScore;
             hits = StandardBallHits;

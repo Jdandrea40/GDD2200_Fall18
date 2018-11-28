@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4202003221981164}
   - component: {fileID: 212331838127699496}
   - component: {fileID: 114989804638870668}
+  - component: {fileID: 50425936321621178}
+  - component: {fileID: 61441350464436012}
+  - component: {fileID: 114824633219840380}
   m_Layer: 0
   m_Name: FreezerEffect
   m_TagString: Untagged
@@ -35,12 +38,69 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983104422028714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.235, y: 1.481, z: 0}
+  m_LocalPosition: {x: -2.8524084, y: 2.050605, z: 0}
   m_LocalScale: {x: 1.015, y: 0.914, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50425936321621178
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983104422028714}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &61441350464436012
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983104422028714}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: c50bf4124b92ea3459b06359b1aca419, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09860608, y: 0.18771744}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.81, y: 1.28}
+    newSize: {x: 1.81, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65490496, y: 0.5917026}
+  m_EdgeRadius: 0
+--- !u!114 &114824633219840380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983104422028714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a0d30253a1bb247a20ff9ea5a848a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballType: 0
 --- !u!114 &114989804638870668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f22732b5c8bc8428f94624e6e14df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballType: 0
   pickUpEffect: 0
 --- !u!212 &212331838127699496
 SpriteRenderer:

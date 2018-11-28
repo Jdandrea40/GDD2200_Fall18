@@ -232,7 +232,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bb82985ae3f8a48b55fd3f631aace6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBall: {fileID: 1680516647204140, guid: eafac53a07de23243874042f68840f56, type: 2}
+  standardBall: {fileID: 1680516647204140, guid: eafac53a07de23243874042f68840f56,
+    type: 2}
+  bonusBall: {fileID: 1626920960736046, guid: 2898dae35a1509e48905e27d5be7768f, type: 2}
+  freezerEffect: {fileID: 1983104422028714, guid: 0982d32229d0dd24f92276f552d0c7f3,
+    type: 2}
+  speedUpEffect: {fileID: 1956971248015060, guid: a08a82f824b048b42bec8b52aec03d46,
+    type: 2}
 --- !u!68 &485416082
 EdgeCollider2D:
   m_ObjectHideFlags: 0

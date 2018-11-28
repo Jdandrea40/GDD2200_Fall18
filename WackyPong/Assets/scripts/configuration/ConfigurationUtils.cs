@@ -99,6 +99,14 @@ public static class ConfigurationUtils
     {
         get { return configurationData.PickUpEffectSpawnRate; }
     }
+
+    /// <summary>
+    /// Gets the duration of the freezer status effect
+    /// </summary>
+    public static float FreezerEffectDuration
+    {
+        get { return configurationData.FreezerEffectDuration; }
+    }
     #endregion
 
     /// <summary>

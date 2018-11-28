@@ -22,9 +22,10 @@ public class ConfigurationData
     static float maxBallSpawnTime = 10;
     static int bonusBallHits = 2;
     static int bonusBallPoints = 5;
-    static float standardBallSpawnRate = 0.6f;
-    static float bonusBallSpawnRate = 0.2f;
-    static float pickUpEffectSpawnRate = 0.1f;
+    static float standardBallSpawnRate = .4f;
+    static float bonusBallSpawnRate = .8f;
+    static float pickUpEffectSpawnRate = .9f;
+    static float freezerEffectDuration = 2;
 
     #endregion
 
@@ -113,7 +114,7 @@ public class ConfigurationData
     /// </summary>
     public float BonusBallSpawnRate
     {
-        get { return BonusBallSpawnRate; }
+        get { return bonusBallSpawnRate; }
     }
     /// <summary>
     /// Gets the spawn rate for PickUp Effects
@@ -123,7 +124,13 @@ public class ConfigurationData
         get { return pickUpEffectSpawnRate; }
     }
 
-
+    /// <summary>
+    /// Gets the duration of the freezer status effect
+    /// </summary>
+    public float FreezerEffectDuration
+    {
+        get { return freezerEffectDuration; }
+    }
 
 
     #endregion
@@ -193,6 +200,8 @@ public class ConfigurationData
         standardBallSpawnRate = float.Parse(values[8]);
         bonusBallSpawnRate = float.Parse(values[9]);
         pickUpEffectSpawnRate = float.Parse(values[10]);
+        freezerEffectDuration = float.Parse(values[11]);
+        
 
     }
 

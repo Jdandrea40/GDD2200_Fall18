@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 24bb82985ae3f8a48b55fd3f631aace6
-timeCreated: 1517429436
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - standardBall: {instanceID: 0}
+  - bonusBall: {fileID: 1626920960736046, guid: 2898dae35a1509e48905e27d5be7768f,
+      type: 2}
+  - freezerEffect: {instanceID: 0}
+  - speedUpEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
