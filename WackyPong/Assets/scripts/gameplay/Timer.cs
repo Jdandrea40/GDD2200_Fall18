@@ -41,23 +41,24 @@ public class Timer : MonoBehaviour
 				totalSeconds = value;
 			}
 		}
+        get { return totalSeconds; }
 	}
-	
-	/// <summary>
-	/// Gets whether or not the timer has finished running
-	/// This property returns false if the timer has never been started
-	/// </summary>
-	/// <value>true if finished; otherwise, false.</value>
-	//public bool Finished
- //   {
-	//	get { return started && !running; } 
-	//}
-	
-	/// <summary>
-	/// Gets whether or not the timer is currently running
-	/// </summary>
-	/// <value>true if running; otherwise, false.</value>
-	public bool Running
+
+    /// <summary>
+    /// Gets whether or not the timer has finished running
+    /// This property returns false if the timer has never been started
+    /// </summary>
+    /// <value>true if finished; otherwise, false.</value>
+    public bool Finished
+    {
+        get { return started && !running; }
+    }
+
+    /// <summary>
+    /// Gets whether or not the timer is currently running
+    /// </summary>
+    /// <value>true if running; otherwise, false.</value>
+    public bool Running
     {
 		get { return running; }
 	}

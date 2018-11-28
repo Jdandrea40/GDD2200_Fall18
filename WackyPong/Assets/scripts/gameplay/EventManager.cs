@@ -17,8 +17,8 @@ public static class EventManager
     static UnityAction ballLostListener;
 
     // Invoker/Listener suppport for death timer 
-    static Ball ballDiedInvoker;
-    static UnityAction ballDiedListener;
+    static List<Ball> ballDiedInvoker = new List<Ball>();
+    static List<UnityAction> ballDiedListener = new List<UnityAction>();
 
     // Invoker/Listener suppport for the balls Hits Added Event
     static Paddle hitsAddedInvoker;
@@ -28,13 +28,18 @@ public static class EventManager
     static Timer timerFinishedInvoker;
     static UnityAction timerFinishedListener;
 
+    static List<PickUpEffects> freezerEffectInvoker = new List<PickUpEffects>();
+    static List<UnityAction<ScreenSide, float>> freezerEffectListener = new List<UnityAction<ScreenSide, float>>();
+
+    static List<PickUpEffects> speedUpEffectInvoker = new List<PickUpEffects>();
+    static List<UnityAction<int>> speedUpEffectListener = new List<UnityAction<int>>();
+
     /// <summary>
     /// Invoker method added for Scoring
     /// </summary>
     /// <param name="invoker"></param>
     public static void AddPointsAddedInvoker(Ball invoker)
     {
-
         pointsAddedInvoker.Add(invoker);
         foreach(UnityAction<ScreenSide, int> listener in pointsAddedListener)
         {
@@ -48,7 +53,6 @@ public static class EventManager
     /// <param name="listener"></param>
     public static void AddPointsAddedListener(UnityAction<ScreenSide, int> listener)
     {
-
         pointsAddedListener.Add(listener);
         foreach(Ball invoker in pointsAddedInvoker)
         {
@@ -108,15 +112,14 @@ public static class EventManager
         }
     }
 
-
     /// <summary>
     /// Invoker method for dead balls
     /// </summary>
     /// <param name="invoker"></param>
     public static void BallDiedInvoker(Ball invoker)
     {
-        ballDiedInvoker = invoker;
-        if (ballDiedListener != null)
+        ballDiedInvoker.Add(invoker);
+        foreach (UnityAction listener in ballDiedListener)
         {
             invoker.AddBallDiedListener(ballLostListener);
         }
@@ -128,10 +131,62 @@ public static class EventManager
     /// <param name="listener"></param>
     public static void BallDiedListener(UnityAction listener)
     {
-        ballDiedListener = listener;
-        if (ballDiedInvoker != null)
+        ballDiedListener.Add(listener);
+        foreach (Ball invoker in ballDiedInvoker)
         {
-            ballLostInvoker.AddBallDiedListener(listener);
+            invoker.AddBallDiedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Freezer Effect Invoker
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void FreezerEffectInvoker(PickUpEffects invoker)
+    {
+        freezerEffectInvoker.Add(invoker);
+        foreach (UnityAction<ScreenSide, float> listener in freezerEffectListener)
+        {
+            invoker.AddFreezerEffectActivatedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Freezer effect Listeners
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void FreezerEffectListener(UnityAction<ScreenSide, float> listener)
+    {
+        freezerEffectListener.Add(listener);
+        foreach (PickUpEffects invoker in freezerEffectInvoker)
+        {
+            invoker.AddFreezerEffectActivatedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// SpeedUp Effect Invokers
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void SpeedEffectInvoker(PickUpEffects invoker)
+    {
+        speedUpEffectInvoker.Add(invoker);
+        foreach (UnityAction<int> listener in speedUpEffectListener)
+        {
+            invoker.AddSpeedEffectActiveListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// SpeedUp Effect Listeners
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void SpeedUpEffectListener(UnityAction<int> listener)
+    {
+        speedUpEffectListener.Add(listener);
+        foreach(PickUpEffects invoker in speedUpEffectInvoker)
+        {
+            invoker.AddSpeedEffectActiveListener(listener);
         }
     }
 }

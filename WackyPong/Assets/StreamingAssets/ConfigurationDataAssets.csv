@@ -1,2 +1,2 @@
-BallImpulseForce,PaddleMoveUnitsPerSecond,StandardBallHits,BallLifeTime,MinimumBallSpawnTime,MaximumBallSpawnTime,BonusBallHits,BonusBallPoints,StandardBallSpawnRate,BonusBallSpawnRate,PickUpEffectSpawnRate,FreezerEffectDuration
-5,10,1,10,5,10,2,5,0.4,0.8,0.1,2
+BallImpulseForce,PaddleMoveUnitsPerSecond,StandardBallHits,BallLifeTime,MinimumBallSpawnTime,MaximumBallSpawnTime,BonusBallHits,BonusBallPoints,StandardBallSpawnRate,BonusBallSpawnRate,PickUpEffectSpawnRate,FreezerEffectDuration,SpeedUpEffectForce
+5,10,1,10,5,10,2,5,0.4,0.8,0.1,2,10

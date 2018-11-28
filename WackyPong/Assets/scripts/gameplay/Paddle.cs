@@ -20,12 +20,27 @@ public class Paddle : MonoBehaviour
     float colliderHalfHeight;
     float colliderHalfWidth;
 
+    Timer freezeTimer;
+    float freezeDuration;
+    bool isFrozen;
+
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;      // const value saved for paddle bounce
 
     BoxCollider2D ballColl;                                     // ball collider support
 
     HitsAddedEvent hitsAddedEvent;                              // Event Manager Support
+    BallDiedEvent ballDiedEvent;
+    FreezerEffectsActivated freezerEffectsActivatedEvent;
 
+    //public void AddFreezerEffectActivatedListener(UnityAction<ScreenSide, float> listener)
+    //{
+    //    freezerEffectsActivatedEvent.AddListener(listener);
+    //}
+    // Adds a listener to the paddle for Hits Calculations
+    public void AddHitsAddedListener(UnityAction<ScreenSide, int> listener)
+    {
+        hitsAddedEvent.AddListener(listener);
+    }
     /// <summary>
     /// Use this for initialization
     /// </summary>
@@ -41,9 +56,17 @@ public class Paddle : MonoBehaviour
         colliderHalfHeight = bc2d.size.y / 2;
         colliderHalfWidth = bc2d.size.x / 2;
 
+        freezeDuration = ConfigurationUtils.FreezerEffectDuration;
+        freezeTimer = gameObject.AddComponent<Timer>();
+        freezeTimer.Duration = freezeDuration * Time.deltaTime;
+        isFrozen = false;
+
         // Support for event manager system
         hitsAddedEvent = new HitsAddedEvent();
+        ballDiedEvent = new BallDiedEvent();
+
         EventManager.AddPointsInvoker(this);
+        EventManager.FreezerEffectListener(FreezePaddle);
     }
 
     /// <summary>
@@ -51,12 +74,16 @@ public class Paddle : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        if (freezeTimer.Finished)
+        {
+            isFrozen = false;
+        }
         // saved for efficiency
         float leftPaddleInput = Input.GetAxisRaw("LeftPaddle");
         float rightPaddleInput = Input.GetAxisRaw("RightPaddle");
 
         // Handles input and movement of Left Paddle
-        if (leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle"))
+        if (leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle") && isFrozen == false)
         {
             Vector2 position = rb2d.position;
             position.y += leftPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
@@ -66,7 +93,7 @@ public class Paddle : MonoBehaviour
         }
 
         // Handles input and movement of Right Paddle
-        if (rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle"))
+        if (rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle") && isFrozen == false)
         {
             Vector2 position = rb2d.position;
             position.y += rightPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
@@ -133,13 +160,15 @@ public class Paddle : MonoBehaviour
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
             ballScript.SetDirection(direction);
         }
+
+        // checks for a pickup collision
+        if (coll.gameObject.CompareTag("PickUp"))
+        {
+            FreezePaddle(screenSide, freezeDuration);
+        }
     }
 
-    // Adds a listener to the paddle for Hits Calculations
-    public void AddHitsAddedListener(UnityAction<ScreenSide,int> listener)
-    {
-        hitsAddedEvent.AddListener(listener);
-    }
+
 
     /// <summary>
     /// Checks for a proper Front Collision
@@ -157,5 +186,26 @@ public class Paddle : MonoBehaviour
 
         // returns the value on collison
         return Mathf.Abs(contactPoint1.point.x - contactPoint2.point.x) < tolerance;
+    }
+
+    /// <summary>
+    /// Freeze paddle method
+    /// </summary>
+    /// <param name="side"></param>
+    /// <param name="freezeDuration"></param>
+    void FreezePaddle(ScreenSide side, float freezeDuration)
+    {
+        if (isFrozen == false)
+        {
+            freezeTimer.Duration = freezeDuration;
+        }
+        else
+        {
+            freezeTimer.Duration = freezeTimer.Duration + freezeDuration;
+        }
+
+        freezeTimer.Run();
+        isFrozen = true;
+
     }
 }

@@ -107,6 +107,14 @@ public static class ConfigurationUtils
     {
         get { return configurationData.FreezerEffectDuration; }
     }
+
+    /// <summary>
+    /// Gets SpeedUp effect speed
+    /// </summary>
+    public static int SpeedUpEffectForce
+    {
+        get { return configurationData.SpeedUpEffectForce; }
+    }
     #endregion
 
     /// <summary>

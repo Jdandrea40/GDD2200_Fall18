@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 114989804638870668}
   - component: {fileID: 50425936321621178}
   - component: {fileID: 61441350464436012}
-  - component: {fileID: 114824633219840380}
+  - component: {fileID: 114129543628188136}
   m_Layer: 0
   m_Name: FreezerEffect
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.09860608, y: 0.18771744}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.48, y: 0.48999998, z: 0.7, w: 0.16}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.81, y: 1.28}
     newSize: {x: 1.81, y: 1.28}
@@ -89,7 +89,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.65490496, y: 0.5917026}
   m_EdgeRadius: 0
---- !u!114 &114824633219840380
+--- !u!114 &114129543628188136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1983104422028714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a0d30253a1bb247a20ff9ea5a848a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 99f22732b5c8bc8428f94624e6e14df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ballType: 0
@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballType: 0
-  pickUpEffect: 0
 --- !u!212 &212331838127699496
 SpriteRenderer:
   m_ObjectHideFlags: 1

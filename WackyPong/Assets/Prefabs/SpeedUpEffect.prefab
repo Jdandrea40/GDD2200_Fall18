@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114034403304769854}
   m_Layer: 0
   m_Name: SpeedUpEffect
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.028173298, y: 0.15643167}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.19, y: 0.16, z: 0.13, w: 0.02}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.81, y: 1.28}
     newSize: {x: 1.81, y: 1.28}
@@ -112,8 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f22732b5c8bc8428f94624e6e14df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballType: 2
-  pickUpEffect: 2
+  ballType: 0
 --- !u!212 &212861814636272282
 SpriteRenderer:
   m_ObjectHideFlags: 1

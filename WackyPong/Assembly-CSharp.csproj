@@ -68,8 +68,11 @@
     <Compile Include="Assets\scripts\Enumerations\ScreenSide.cs" />
     <Compile Include="Assets\scripts\Events\BallDiedEvent.cs" />
     <Compile Include="Assets\scripts\Events\BallLostEvent.cs" />
+    <Compile Include="Assets\scripts\Events\FreezerEffectsActivated.cs" />
+    <Compile Include="Assets\scripts\Events\FreezerEffectsActivatedEvent.cs" />
     <Compile Include="Assets\scripts\Events\HitsAddedEvent.cs" />
     <Compile Include="Assets\scripts\Events\PointsAddedEvent.cs" />
+    <Compile Include="Assets\scripts\Events\SpeedUpEffectActiveEvent.cs" />
     <Compile Include="Assets\scripts\Events\TimerFinishedEvent.cs" />
     <Compile Include="Assets\scripts\gameplay\Ball.cs" />
     <Compile Include="Assets\scripts\gameplay\BallSpawner.cs" />

@@ -8,6 +8,7 @@ using UnityEngine.Events;
 /// </summary>
 public class BallSpawner : MonoBehaviour
 {
+    // Prefabs stored for specific ball spawning
     [SerializeField]
     GameObject standardBall;
     [SerializeField]
@@ -26,11 +27,6 @@ public class BallSpawner : MonoBehaviour
     Vector3 ballCollider;
     Vector2 bottomLeftCorner;
     Vector2 topRightCorner;
-
-    float standardBallSpawn;
-    float bonusBallSpawn;
-    float pickUpEffectSpawn;
-
     Collider2D overlapSpawn;            // Collider support for free spawn
     
 	/// <summary>
@@ -38,11 +34,6 @@ public class BallSpawner : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
-        // Spawn rate support
-        standardBallSpawn = ConfigurationUtils.StandardBallSpawnRate;
-        bonusBallSpawn = ConfigurationUtils.BonusBallSpawnRate;
-        pickUpEffectSpawn = ConfigurationUtils.PickUpEffectSpawnRate;
-
         // Gets ball colider component
         ballCollider = standardBall.GetComponent<BoxCollider2D>().bounds.size;
 
@@ -74,16 +65,21 @@ public class BallSpawner : MonoBehaviour
         }
         else
         {
-            if (Random.value > 0.4f)
+            // Spawns standards balls 60% of the time
+            if (Random.value > ConfigurationUtils.StandardBallSpawnRate)
             {
                 Instantiate(standardBall);
             }
-            else if (Random.value > 0.8f )
+            // spawns bonus balls 20% of the time
+            else if (Random.value > ConfigurationUtils.BonusBallSpawnRate)
             {
                 Instantiate(bonusBall);
             }
+            // spawns pickup effects 20% of the time
             else
             {
+                // 50% chance to spawn either SpeedUp or Freezer Effects
+                // (original 20% = 10% for each)
                 int pickUpType = Random.Range(0, 2);
                 if (pickUpType < .5)
                 {

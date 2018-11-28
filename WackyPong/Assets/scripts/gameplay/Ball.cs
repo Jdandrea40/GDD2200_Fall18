@@ -11,12 +11,11 @@ public class Ball : MonoBehaviour
     // Ball type Serialization/Support
     [SerializeField]
     PickUpEffectsEnum ballType;
-    //[SerializeField]
-    //GameObject standardBall;
-    //[SerializeField]
-    //GameObject bonusBall;
+    BoxCollider2D ballCollider;
+    float ballHalfWidth;
     int score;
     static int hits;
+    bool speedUpActive;
      
     // saved for efficiency
     Rigidbody2D rb2d;
@@ -82,15 +81,26 @@ public class Ball : MonoBehaviour
     {
         get { return hits; }
     }
+
+    public static int SpeedUpActiveSpeed
+    {
+        get { return ConfigurationUtils.SpeedUpEffectForce; }
+    }
     #endregion
 
     /// <summary>
     /// Use this for initialization
     /// </summary>
-    void Start()
+    public virtual void Start()
 	{
+        speedUpActive = false;
+
         // gets Rigidbody2D Componenet
         rb2d = GetComponent<Rigidbody2D>();
+
+        // Ball Collider Support
+        ballCollider = gameObject.GetComponent<BoxCollider2D>();
+        ballHalfWidth = ballCollider.size.x / 2;
 
         // Initializes Events 
         pointsAddedEvent = new PointsAddedEvent();
@@ -120,12 +130,15 @@ public class Ball : MonoBehaviour
         // Gets ball spawner component
         ballSpawner = Camera.main.GetComponent<BallSpawner>();
 
+        // Applies points and hits for Bonus Balls
         if (ballType == PickUpEffectsEnum.BonusBall)
         {
             score = BonusBallScore;
             hits = BonusBallHits;
         }
-        else if (ballType == PickUpEffectsEnum.StandardBall || ballType == PickUpEffectsEnum.FreezerEffect || ballType == PickUpEffectsEnum.SpeedUpEffect)
+
+        // If not a Bonus Ball, Standard points are issued
+        else if (ballType == PickUpEffectsEnum.StandardBall)
         {
             score = StandardBallScore;
             hits = StandardBallHits;
@@ -155,7 +168,7 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Ball Death timer Event Method
     /// </summary>
-    void BallDeathTimer()
+    public virtual void BallDeathTimer()
     {
         Destroy(gameObject);
         ballDiedEvent.Invoke();
@@ -167,7 +180,10 @@ public class Ball : MonoBehaviour
     /// </summary>
     void BallStartTimer()
     {
-        rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
+        if (ballType != PickUpEffectsEnum.SpeedUpEffect && speedUpActive == false)
+        {
+            rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
+        }
     }
 
     /// <summary>
@@ -212,19 +228,19 @@ public class Ball : MonoBehaviour
     private void OnBecameInvisible()
     {
         // Regulates scoring
-        if ((Camera.main.WorldToViewportPoint(transform.position).x > 1 ||
-            Camera.main.WorldToViewportPoint(transform.position).x < 0))
+        if (transform.position.x + ballHalfWidth < ScreenUtils.ScreenLeft ||
+            transform.position.x + ballHalfWidth > ScreenUtils.ScreenRight)
         {
             // Checks for screen side to apply appropriate scoring
             // Ball goes off Right --- Scores + for Left
-            if (rb2d.velocity.x > 0)
+            if (transform.position.x > 0)
             {
                 pointsAddedEvent.Invoke(ScreenSide.Left, score);
                 ballLostEvent.Invoke();
                 deathTimer.Stop();
             }
             // Ball goes off Left --- Score + for Right
-            else if (rb2d.velocity.x < 0)
+            else if (transform.position.x < 0)
             {
                 pointsAddedEvent.Invoke(ScreenSide.Right, score);
                 ballLostEvent.Invoke();
@@ -233,10 +249,4 @@ public class Ball : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void PickUpEffect()
-    {
-
-    }
-
 }
