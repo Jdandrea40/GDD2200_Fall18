@@ -64,11 +64,11 @@
     <Compile Include="Assets\scripts\configuration\ConfigurationData.cs" />
     <Compile Include="Assets\scripts\configuration\ConfigurationUtils.cs" />
     <Compile Include="Assets\scripts\Enumerations\MenuNames.cs" />
+    <Compile Include="Assets\scripts\Enumerations\PickUpEffectsEnum.cs" />
     <Compile Include="Assets\scripts\Enumerations\ScreenSide.cs" />
     <Compile Include="Assets\scripts\Events\BallDiedEvent.cs" />
     <Compile Include="Assets\scripts\Events\BallLostEvent.cs" />
     <Compile Include="Assets\scripts\Events\HitsAddedEvent.cs" />
-    <Compile Include="Assets\scripts\Events\PickUpEffectsEnum.cs" />
     <Compile Include="Assets\scripts\Events\PointsAddedEvent.cs" />
     <Compile Include="Assets\scripts\Events\TimerFinishedEvent.cs" />
     <Compile Include="Assets\scripts\gameplay\Ball.cs" />

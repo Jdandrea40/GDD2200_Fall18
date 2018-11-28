@@ -20,6 +20,11 @@ public class ConfigurationData
     static float ballLifeTime = 10;
     static float minBallSpawnTime = 5;
     static float maxBallSpawnTime = 10;
+    static int bonusBallHits = 2;
+    static int bonusBallPoints = 5;
+    static float standardBallSpawnRate = 0.6f;
+    static float bonusBallSpawnRate = 0.2f;
+    static float pickUpEffectSpawnRate = 0.1f;
 
     #endregion
 
@@ -53,6 +58,22 @@ public class ConfigurationData
     }
 
     /// <summary>
+    /// Bonus ball points per hit
+    /// </summary>
+    public int BonusBallHit
+    {
+        get { return bonusBallHits; }
+    }
+
+    /// <summary>
+    /// Bonus ball points
+    /// </summary>
+    public int BonusBallPoints
+    {
+        get { return bonusBallPoints; }
+    }
+
+    /// <summary>
     /// Gets the ball Lifetime
     /// </summary>
     /// <value>ball lifetime</value>
@@ -78,6 +99,32 @@ public class ConfigurationData
     {
         get { return maxBallSpawnTime; }
     }
+
+    /// <summary>
+    /// Gets the spawn rate for Standard Balls
+    /// </summary>
+    public float StandardBallSpawnRate
+    {
+        get { return standardBallSpawnRate; }
+    }
+
+    /// <summary>
+    /// Gets the spawn rate for Bonus Balls
+    /// </summary>
+    public float BonusBallSpawnRate
+    {
+        get { return BonusBallSpawnRate; }
+    }
+    /// <summary>
+    /// Gets the spawn rate for PickUp Effects
+    /// </summary>
+    public float PickUpEffectSpawnRate
+    {
+        get { return pickUpEffectSpawnRate; }
+    }
+
+
+
 
     #endregion
 
@@ -141,6 +188,11 @@ public class ConfigurationData
         ballLifeTime = float.Parse(values[3]);
         minBallSpawnTime = float.Parse(values[4]);
         maxBallSpawnTime = float.Parse(values[5]);
+        bonusBallHits = int.Parse(values[6]);
+        bonusBallPoints = int.Parse(values[7]);
+        standardBallSpawnRate = float.Parse(values[8]);
+        bonusBallSpawnRate = float.Parse(values[9]);
+        pickUpEffectSpawnRate = float.Parse(values[10]);
 
     }
 

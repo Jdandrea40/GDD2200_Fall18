@@ -9,7 +9,14 @@ using UnityEngine.Events;
 public class BallSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject prefabBall;
+    GameObject standardBall;
+    [SerializeField]
+    GameObject bonusBall;
+    [SerializeField]
+    GameObject freezerEffect;
+    [SerializeField]
+    GameObject pickUpEffect;
+
 
     // spawn timer support
     Timer spawnTimer;
@@ -20,6 +27,10 @@ public class BallSpawner : MonoBehaviour
     Vector2 bottomLeftCorner;
     Vector2 topRightCorner;
 
+    float standardBallSpawn;
+    float bonusBallSpawn;
+    float pickUpEffectSpawn;
+
     Collider2D overlapSpawn;            // Collider support for free spawn
     
 	/// <summary>
@@ -27,8 +38,13 @@ public class BallSpawner : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
+        // Spawn rate support
+        standardBallSpawn = ConfigurationUtils.StandardBallSpawnRate;
+        bonusBallSpawn = ConfigurationUtils.BonusBallSpawnRate;
+        pickUpEffectSpawn = ConfigurationUtils.PickUpEffectSpawnRate;
+
         // Gets ball colider component
-        ballCollider = prefabBall.GetComponent<BoxCollider2D>().bounds.size;
+        ballCollider = standardBall.GetComponent<BoxCollider2D>().bounds.size;
 
         // Gets top and bottom corners of ball
         bottomLeftCorner = new Vector2(0 - ballCollider.x / 2, 0 - ballCollider.y / 2);
@@ -58,7 +74,7 @@ public class BallSpawner : MonoBehaviour
         }
         else
         {
-            Instantiate(prefabBall);
+            Instantiate(standardBall);
         }
 
     }

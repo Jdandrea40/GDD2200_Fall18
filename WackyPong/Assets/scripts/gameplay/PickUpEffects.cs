@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PickUpEffects : MonoBehaviour
 {
+    [SerializeField]
     PickUpEffectsEnum pickUpEffect;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+
 		
 	}
 	
@@ -17,11 +20,6 @@ public class PickUpEffects : MonoBehaviour
 	}
 
     void FreezerEffect()
-    {
-
-    }
-
-    void DoublePointEffect()
     {
 
     }

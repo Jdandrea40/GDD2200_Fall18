@@ -8,6 +8,16 @@ using UnityEngine.Events;
 /// </summary>
 public class Ball : MonoBehaviour
 {
+    // Ball type Serialization/Support
+    [SerializeField]
+    PickUpEffectsEnum ballType;
+    //[SerializeField]
+    //GameObject standardBall;
+    //[SerializeField]
+    //GameObject bonusBall;
+    int score;
+    static int hits;
+     
     // saved for efficiency
     Rigidbody2D rb2d;
 
@@ -18,9 +28,11 @@ public class Ball : MonoBehaviour
     // Screen side support
     ScreenSide screenSide;
 
+    // Spawner support
     BallSpawner ballSpawner;
     Vector2 direction;
 
+    // Timer support
     Timer deathTimer;
     Timer startTimer;
 
@@ -30,10 +42,11 @@ public class Ball : MonoBehaviour
     BallDiedEvent ballDiedEvent;
 
     #region Properties
+
     /// <summary>
     /// Hit property to allow hit increase in HUD
     /// </summary>
-    public static int Hits
+    public static int StandardBallHits
     {
         get { return ConfigurationUtils.StandardBallHit; }
     }
@@ -41,9 +54,33 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Score property for a standard ball
     /// </summary>
-    public static int Score
+    public static int StandardBallScore
     {
         get { return ConfigurationUtils.StandardBallHit; }
+    }
+
+    /// <summary>
+    /// Hit property for Bonus Ball
+    /// </summary>
+    public static int BonusBallHits
+    {
+        get { return ConfigurationUtils.BonusBallHit; }
+    }
+
+    /// <summary>
+    /// Score property for Bonus Ball
+    /// </summary>
+    public static int BonusBallScore
+    {
+        get { return ConfigurationUtils.BonusBallPoints; }
+    }
+
+    /// <summary>
+    /// Hit property based on ball type
+    /// </summary>
+    public static int Hits
+    {
+        get { return hits; }
     }
     #endregion
 
@@ -69,14 +106,12 @@ public class Ball : MonoBehaviour
         float angleSelect = Random.value;
 
         // Death Timer (with invoker)
-
         deathTimer = gameObject.AddComponent<Timer>();
         deathTimer.AddTimerFinishedListener(BallDeathTimer);
         deathTimer.Duration = ConfigurationUtils.BallLifetime;
         deathTimer.Run();
 
         // Start Timer (with invoker)
-
         startTimer = gameObject.AddComponent<Timer>();
         startTimer.AddTimerFinishedListener(BallStartTimer);
         startTimer.Duration = 1;
@@ -84,7 +119,17 @@ public class Ball : MonoBehaviour
 
         // Gets ball spawner component
         ballSpawner = Camera.main.GetComponent<BallSpawner>();
-        
+
+        if (ballType == PickUpEffectsEnum.BonusBall)
+        {
+            score = BonusBallScore;
+            hits = BonusBallHits;
+        }
+        else if (ballType == PickUpEffectsEnum.StandardBall)
+        {
+            score = StandardBallScore;
+            hits = StandardBallHits;
+        }
 
         // Sets min and max angle off of Random.Range
         if (angleSelect < 0.5f)
@@ -116,6 +161,7 @@ public class Ball : MonoBehaviour
         ballDiedEvent.Invoke();
     }
 
+    #region Events
     /// <summary>
     /// Ball start event method
     /// </summary>
@@ -148,6 +194,7 @@ public class Ball : MonoBehaviour
     {
         ballDiedEvent.AddListener(listener);
     }
+    #endregion
 
     /// <summary>
     /// Sets Ball Direction
@@ -157,7 +204,6 @@ public class Ball : MonoBehaviour
     {
         Vector2 velocity = rb2d.velocity.magnitude * direction;
         rb2d.velocity = velocity;
-
     }
 
     /// <summary>
@@ -173,14 +219,14 @@ public class Ball : MonoBehaviour
             // Ball goes off Right --- Scores + for Left
             if (rb2d.velocity.x > 0)
             {
-                pointsAddedEvent.Invoke(ScreenSide.Left, Ball.Score);
+                pointsAddedEvent.Invoke(ScreenSide.Left, score);
                 ballLostEvent.Invoke();
                 deathTimer.Stop();
             }
             // Ball goes off Left --- Score + for Right
             else if (rb2d.velocity.x < 0)
             {
-                pointsAddedEvent.Invoke(ScreenSide.Right, Ball.Score);
+                pointsAddedEvent.Invoke(ScreenSide.Right, score);
                 ballLostEvent.Invoke();
                 deathTimer.Stop();
             }

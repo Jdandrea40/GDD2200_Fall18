@@ -125,6 +125,7 @@ public class Paddle : MonoBehaviour
             }
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
+            
             // Adds hits score to appropriate player side
             hitsAddedEvent.Invoke(screenSide, Ball.Hits);
 

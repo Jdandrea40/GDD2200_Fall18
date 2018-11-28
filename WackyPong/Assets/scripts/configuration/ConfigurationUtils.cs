@@ -39,6 +39,22 @@ public static class ConfigurationUtils
     }
 
     /// <summary>
+    /// Gets Bonus Ball hit amount
+    /// </summary>
+    public static int BonusBallHit
+    {
+        get { return configurationData.BonusBallHit; }
+    }
+
+    /// <summary>
+    /// Gets bonus ball points amount
+    /// </summary>
+    public static int BonusBallPoints
+    {
+        get { return configurationData.BonusBallPoints; }
+    }
+
+    /// <summary>
     /// Gets the Ball Lifetime Amount
     /// </summary>
     public static float BallLifetime
@@ -54,10 +70,34 @@ public static class ConfigurationUtils
         get { return configurationData.MinBallSpawnTime; }
     }
 
-    // Gets maximum soawn time
+    /// <summary>
+    /// Gets maximum spawn time
+    /// </summary>
     public static float MaxBallSpawnTime
     {
         get { return configurationData.MaxBallSpawnTime; }
+    }
+
+    /// <summary>
+    /// Gets Standard Ball Spawn Rate
+    /// </summary>
+    public static float StandardBallSpawnRate
+    {
+        get { return configurationData.StandardBallSpawnRate; }
+    }
+    /// <summary>
+    /// Gets Bonus Ball Spawn Rate
+    /// </summary>
+    public static float BonusBallSpawnRate
+    {
+        get { return configurationData.BonusBallSpawnRate; }
+    }
+    /// <summary>
+    /// Gets PickUp Effect Spawn Rate
+    /// </summary>
+    public static float PickUpEffectSpawnRate
+    {
+        get { return configurationData.PickUpEffectSpawnRate; }
     }
     #endregion
 
