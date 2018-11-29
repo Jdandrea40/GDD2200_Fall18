@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SpeedUpEffectActiveEvent : UnityEvent<int>
+public class SpeedUpEffectActiveEvent : UnityEvent<float, int>
 {
 
 }

@@ -21,8 +21,8 @@ public static class EventManager
     static List<UnityAction> ballDiedListener = new List<UnityAction>();
 
     // Invoker/Listener suppport for the balls Hits Added Event
-    static Paddle hitsAddedInvoker;
-    static UnityAction<ScreenSide, int> hitsAddedListener;
+    static List<Paddle> hitsAddedInvoker = new List<Paddle>();
+    static List<UnityAction<ScreenSide, int>> hitsAddedListener = new List<UnityAction<ScreenSide, int>>();
 
     // Invoker/Listener suppport for the Finishing timer
     static Timer timerFinishedInvoker;
@@ -32,7 +32,7 @@ public static class EventManager
     static List<UnityAction<ScreenSide, float>> freezerEffectListener = new List<UnityAction<ScreenSide, float>>();
 
     static List<PickUpEffects> speedUpEffectInvoker = new List<PickUpEffects>();
-    static List<UnityAction<int>> speedUpEffectListener = new List<UnityAction<int>>();
+    static List<UnityAction<float, int>> speedUpEffectListener = new List<UnityAction<float, int>>();
 
     /// <summary>
     /// Invoker method added for Scoring
@@ -64,12 +64,12 @@ public static class EventManager
     /// Invoker method for hit total calculations
     /// </summary>
     /// <param name="invoker"></param>
-    public static void AddPointsInvoker(Paddle invoker)
+    public static void AddHitsInvoker(Paddle invoker)
     {
-        hitsAddedInvoker = invoker;
-        if (hitsAddedListener != null)
+        hitsAddedInvoker.Add(invoker);
+        foreach (UnityAction<ScreenSide, int> listener in hitsAddedListener)
         {
-            invoker.AddHitsAddedListener(hitsAddedListener);
+            invoker.AddHitsAddedListener(listener);
         }
     }
 
@@ -79,10 +79,10 @@ public static class EventManager
     /// <param name="listener"></param>
     public static void AddHitsListener(UnityAction<ScreenSide, int> listener)
     {
-        hitsAddedListener = listener;
-        if (hitsAddedInvoker != null)
+        hitsAddedListener.Add(listener);
+        foreach (Paddle invoker in hitsAddedInvoker)
         {
-            hitsAddedInvoker.AddHitsAddedListener(listener);
+            invoker.AddHitsAddedListener(listener);
         }
     }
 
@@ -171,7 +171,7 @@ public static class EventManager
     public static void SpeedEffectInvoker(PickUpEffects invoker)
     {
         speedUpEffectInvoker.Add(invoker);
-        foreach (UnityAction<int> listener in speedUpEffectListener)
+        foreach (UnityAction<float, int> listener in speedUpEffectListener)
         {
             invoker.AddSpeedEffectActiveListener(listener);
         }
@@ -181,7 +181,7 @@ public static class EventManager
     /// SpeedUp Effect Listeners
     /// </summary>
     /// <param name="listener"></param>
-    public static void SpeedUpEffectListener(UnityAction<int> listener)
+    public static void SpeedUpEffectListener(UnityAction<float, int> listener)
     {
         speedUpEffectListener.Add(listener);
         foreach(PickUpEffects invoker in speedUpEffectInvoker)

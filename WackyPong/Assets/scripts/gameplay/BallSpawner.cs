@@ -65,18 +65,8 @@ public class BallSpawner : MonoBehaviour
         }
         else
         {
-            // Spawns standards balls 60% of the time
-            if (Random.value > ConfigurationUtils.StandardBallSpawnRate)
-            {
-                Instantiate(standardBall);
-            }
-            // spawns bonus balls 20% of the time
-            else if (Random.value > ConfigurationUtils.BonusBallSpawnRate)
-            {
-                Instantiate(bonusBall);
-            }
             // spawns pickup effects 20% of the time
-            else
+            if (Random.value > ConfigurationUtils.PickUpEffectSpawnRate)
             {
                 // 50% chance to spawn either SpeedUp or Freezer Effects
                 // (original 20% = 10% for each)
@@ -89,6 +79,16 @@ public class BallSpawner : MonoBehaviour
                 {
                     Instantiate(speedUpEffect);
                 }
+            }
+            // spawns bonus balls 20% of the time
+            else if (Random.value > ConfigurationUtils.BonusBallSpawnRate)
+            {
+                Instantiate(bonusBall);
+            }
+            // spawns standard balls 60% of the time
+            else
+            {
+                Instantiate(standardBall);
             }
             
         }

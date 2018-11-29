@@ -115,6 +115,14 @@ public static class ConfigurationUtils
     {
         get { return configurationData.SpeedUpEffectForce; }
     }
+
+    /// <summary>
+    /// Gets SpeedUp Effect Duration
+    /// </summary>
+    public static float SpeedUpEffectDuration
+    {
+        get { return configurationData.SpeedUpEffectDuration; }
+    }
     #endregion
 
     /// <summary>

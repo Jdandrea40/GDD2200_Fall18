@@ -7,7 +7,9 @@ TagManager:
   - LeftPaddle
   - RightPaddle
   - Ball
-  - PickUp
+  - FreezeEffect
+  - SpeedUpEffect
+  - BonusBall
   layers:
   - Default
   - TransparentFX

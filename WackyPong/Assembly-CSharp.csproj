@@ -80,7 +80,6 @@
     <Compile Include="Assets\scripts\gameplay\GameplayManager.cs" />
     <Compile Include="Assets\scripts\gameplay\HUD.cs" />
     <Compile Include="Assets\scripts\gameplay\Paddle.cs" />
-    <Compile Include="Assets\scripts\gameplay\PickUpBalls.cs" />
     <Compile Include="Assets\scripts\gameplay\PickUpEffects.cs" />
     <Compile Include="Assets\scripts\gameplay\Timer.cs" />
     <Compile Include="Assets\scripts\Menus\DifficultyMenu.cs" />

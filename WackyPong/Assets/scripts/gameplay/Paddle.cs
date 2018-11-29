@@ -14,6 +14,7 @@ public class Paddle : MonoBehaviour
     // Gets Enumeration
     [SerializeField]
     ScreenSide screenSide;
+    PickUpEffectsEnum ballType;
 
     // Box Collider Support
     BoxCollider2D bc2d;
@@ -22,25 +23,25 @@ public class Paddle : MonoBehaviour
 
     Timer freezeTimer;
     float freezeDuration;
-    bool isFrozen;
+    bool p1IsFrozen;
+    bool p2IsFrozen;
 
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;      // const value saved for paddle bounce
-
+    
     BoxCollider2D ballColl;                                     // ball collider support
 
     HitsAddedEvent hitsAddedEvent;                              // Event Manager Support
     BallDiedEvent ballDiedEvent;
+
+    // Event Supprt
     FreezerEffectsActivated freezerEffectsActivatedEvent;
 
-    //public void AddFreezerEffectActivatedListener(UnityAction<ScreenSide, float> listener)
-    //{
-    //    freezerEffectsActivatedEvent.AddListener(listener);
-    //}
     // Adds a listener to the paddle for Hits Calculations
     public void AddHitsAddedListener(UnityAction<ScreenSide, int> listener)
     {
         hitsAddedEvent.AddListener(listener);
     }
+
     /// <summary>
     /// Use this for initialization
     /// </summary>
@@ -56,16 +57,18 @@ public class Paddle : MonoBehaviour
         colliderHalfHeight = bc2d.size.y / 2;
         colliderHalfWidth = bc2d.size.x / 2;
 
-        freezeDuration = ConfigurationUtils.FreezerEffectDuration;
+        // Freeze Support
         freezeTimer = gameObject.AddComponent<Timer>();
+        freezeDuration = ConfigurationUtils.FreezerEffectDuration;
         freezeTimer.Duration = freezeDuration * Time.deltaTime;
-        isFrozen = false;
+        p1IsFrozen = false;
+        p2IsFrozen = false;
 
         // Support for event manager system
         hitsAddedEvent = new HitsAddedEvent();
-        ballDiedEvent = new BallDiedEvent();
+        EventManager.AddHitsInvoker(this);
 
-        EventManager.AddPointsInvoker(this);
+        ballDiedEvent = new BallDiedEvent();
         EventManager.FreezerEffectListener(FreezePaddle);
     }
 
@@ -74,16 +77,20 @@ public class Paddle : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (freezeTimer.Finished)
+        if (p1IsFrozen ==  true && freezeTimer.Finished)
         {
-            isFrozen = false;
+            p1IsFrozen = false;
+        }
+        if (p2IsFrozen == true && freezeTimer.Finished)
+        {
+            p2IsFrozen = false;
         }
         // saved for efficiency
         float leftPaddleInput = Input.GetAxisRaw("LeftPaddle");
         float rightPaddleInput = Input.GetAxisRaw("RightPaddle");
 
         // Handles input and movement of Left Paddle
-        if (leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle") && isFrozen == false)
+        if (leftPaddleInput != 0 && gameObject.CompareTag("LeftPaddle") && p1IsFrozen == false)
         {
             Vector2 position = rb2d.position;
             position.y += leftPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
@@ -93,7 +100,7 @@ public class Paddle : MonoBehaviour
         }
 
         // Handles input and movement of Right Paddle
-        if (rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle") && isFrozen == false)
+        if (rightPaddleInput != 0 && gameObject.CompareTag("RightPaddle") && p2IsFrozen == false)
         {
             Vector2 position = rb2d.position;
             position.y += rightPaddleInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.deltaTime;
@@ -152,9 +159,8 @@ public class Paddle : MonoBehaviour
             }
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            
             // Adds hits score to appropriate player side
-            hitsAddedEvent.Invoke(screenSide, Ball.Hits);
+            hitsAddedEvent.Invoke(screenSide, coll.gameObject.GetComponent<Ball>().Hits);
 
             // tell ball to set direction to new direction
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
@@ -162,13 +168,11 @@ public class Paddle : MonoBehaviour
         }
 
         // checks for a pickup collision
-        if (coll.gameObject.CompareTag("PickUp"))
+        if (coll.gameObject.CompareTag("FreezeEffect"))
         {
             FreezePaddle(screenSide, freezeDuration);
         }
     }
-
-
 
     /// <summary>
     /// Checks for a proper Front Collision
@@ -195,17 +199,39 @@ public class Paddle : MonoBehaviour
     /// <param name="freezeDuration"></param>
     void FreezePaddle(ScreenSide side, float freezeDuration)
     {
-        if (isFrozen == false)
+        print("Freeze");
+        // Handles Left Side Freezing
+        if (side == ScreenSide.Left && p1IsFrozen == false)
         {
             freezeTimer.Duration = freezeDuration;
+
+            freezeTimer.Run();
+            p1IsFrozen = true;
         }
         else
         {
             freezeTimer.Duration = freezeTimer.Duration + freezeDuration;
+
+            freezeTimer.Run();
+            p1IsFrozen = true;
         }
 
-        freezeTimer.Run();
-        isFrozen = true;
+        // Handles Right Side Freezing
+        if (side == ScreenSide.Right && p2IsFrozen == false)
+        {
+            freezeTimer.Duration = freezeDuration;
+            freezeTimer.Run();
+            p2IsFrozen = true;
+        }
+        else if (side == ScreenSide.Right && p2IsFrozen == true)
+        {
+            freezeTimer.Duration = freezeTimer.Duration + freezeDuration;
+            freezeTimer.Run();
+            p2IsFrozen = true;
+        }
+
 
     }
 }
+
+

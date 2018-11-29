@@ -14,9 +14,13 @@ public class Ball : MonoBehaviour
     BoxCollider2D ballCollider;
     float ballHalfWidth;
     int score;
-    static int hits;
+    int hits;
+
     bool speedUpActive;
-     
+    bool speedUpWasActive;
+
+
+
     // saved for efficiency
     Rigidbody2D rb2d;
 
@@ -34,6 +38,7 @@ public class Ball : MonoBehaviour
     // Timer support
     Timer deathTimer;
     Timer startTimer;
+    Timer speedUpTimer;
 
     // Event Manager Support
     PointsAddedEvent pointsAddedEvent;
@@ -41,52 +46,39 @@ public class Ball : MonoBehaviour
     BallDiedEvent ballDiedEvent;
 
     #region Properties
-
-    /// <summary>
-    /// Hit property to allow hit increase in HUD
-    /// </summary>
-    public static int StandardBallHits
-    {
-        get { return ConfigurationUtils.StandardBallHit; }
-    }
-
-    /// <summary>
-    /// Score property for a standard ball
-    /// </summary>
-    public static int StandardBallScore
-    {
-        get { return ConfigurationUtils.StandardBallHit; }
-    }
-
-    /// <summary>
-    /// Hit property for Bonus Ball
-    /// </summary>
-    public static int BonusBallHits
-    {
-        get { return ConfigurationUtils.BonusBallHit; }
-    }
-
-    /// <summary>
-    /// Score property for Bonus Ball
-    /// </summary>
-    public static int BonusBallScore
-    {
-        get { return ConfigurationUtils.BonusBallPoints; }
-    }
-
     /// <summary>
     /// Hit property based on ball type
     /// </summary>
-    public static int Hits
+    public int Hits
     {
         get { return hits; }
     }
 
+    /// <summary>
+    /// Speed Up Property
+    /// </summary>
     public static int SpeedUpActiveSpeed
     {
         get { return ConfigurationUtils.SpeedUpEffectForce; }
     }
     #endregion
+
+    /// <summary>
+    /// Adds listener to increment score to appropriate side
+    /// </summary>
+    public void AddPointsAddedListener(UnityAction<ScreenSide, int> listener)
+    {
+        pointsAddedEvent.AddListener(listener);
+    }
+
+    /// <summary>
+    /// listener for lost ball
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddBallLostListener(UnityAction listener)
+    {
+        ballLostEvent.AddListener(listener);
+    }
 
     /// <summary>
     /// Use this for initialization
@@ -111,6 +103,7 @@ public class Ball : MonoBehaviour
         EventManager.AddPointsAddedInvoker(this);
         EventManager.BallLostInvoker(this);
         EventManager.BallDiedInvoker(this);
+        EventManager.SpeedUpEffectListener(SpeedUpActive);
 
         // Angle selection support
         float angleSelect = Random.value;
@@ -127,22 +120,11 @@ public class Ball : MonoBehaviour
         startTimer.Duration = 1;
         startTimer.Run();
 
+        speedUpTimer = gameObject.AddComponent<Timer>();
+        speedUpTimer.AddTimerFinishedListener(SpeedUpDisabled);
+
         // Gets ball spawner component
         ballSpawner = Camera.main.GetComponent<BallSpawner>();
-
-        // Applies points and hits for Bonus Balls
-        if (ballType == PickUpEffectsEnum.BonusBall)
-        {
-            score = BonusBallScore;
-            hits = BonusBallHits;
-        }
-
-        // If not a Bonus Ball, Standard points are issued
-        else if (ballType == PickUpEffectsEnum.StandardBall)
-        {
-            score = StandardBallScore;
-            hits = StandardBallHits;
-        }
 
         // Sets min and max angle off of Random.Range
         if (angleSelect < 0.5f)
@@ -158,13 +140,26 @@ public class Ball : MonoBehaviour
             maxAngle = 45f * Mathf.Deg2Rad;
         }
 
+        // Applies points and hits for Bonus Balls
+        if (ballType == PickUpEffectsEnum.BonusBall)
+        {
+            score = ConfigurationUtils.BonusBallPoints;
+            hits = ConfigurationUtils.BonusBallHit;
+        }
+
+        // If not a Bonus Ball, Standard points are issued
+        if (ballType == PickUpEffectsEnum.StandardBall)
+        {
+            score = ConfigurationUtils.StandardBallHit;
+            hits = ConfigurationUtils.StandardBallHit;
+        }
         // randomly selects from the min and max angles
         float angle = Random.Range(minAngle, maxAngle);
 
         // sets new direction
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
-	
+
     /// <summary>
     /// Ball Death timer Event Method
     /// </summary>
@@ -180,26 +175,23 @@ public class Ball : MonoBehaviour
     /// </summary>
     void BallStartTimer()
     {
-        if (ballType != PickUpEffectsEnum.SpeedUpEffect && speedUpActive == false)
+        if (speedUpActive == true)
+        {
+            rb2d.AddForce(direction * ConfigurationUtils.SpeedUpEffectForce, ForceMode2D.Impulse);
+        }
+        else if (speedUpActive == false)
         {
             rb2d.AddForce(direction * ConfigurationUtils.BallImpulseForce, ForceMode2D.Impulse);
         }
     }
 
-    /// <summary>
-    /// Adds listener to increment score to appropriate side
-    /// </summary>
-    public void AddPointsAddedListener(UnityAction<ScreenSide, int> listener)
+    // called every frame
+    private void Update()
     {
-        pointsAddedEvent.AddListener(listener);
-    }
-    /// <summary>
-    /// listener for lost ball
-    /// </summary>
-    /// <param name="listener"></param>
-    public void AddBallLostListener(UnityAction listener)
-    {
-        ballLostEvent.AddListener(listener);
+        if(speedUpTimer.Finished)
+        {
+            SpeedUpDisabled();
+        }
     }
 
     /// <summary>
@@ -210,6 +202,7 @@ public class Ball : MonoBehaviour
     {
         ballDiedEvent.AddListener(listener);
     }
+
     #endregion
 
     /// <summary>
@@ -220,6 +213,27 @@ public class Ball : MonoBehaviour
     {
         Vector2 velocity = rb2d.velocity.magnitude * direction;
         rb2d.velocity = velocity;
+    }
+
+    /// <summary>
+    /// Activates speed up effect
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="effect"></param>
+    public void SpeedUpActive(float duration, int effect)
+    {
+        print("SPEED");
+        speedUpActive = true;
+        speedUpTimer.Duration = ConfigurationUtils.SpeedUpEffectDuration;
+        speedUpTimer.Run();
+    }
+
+    /// <summary>
+    /// Disables speedup effect
+    /// </summary>
+    void SpeedUpDisabled()
+    {
+        speedUpActive = false;
     }
 
     /// <summary>

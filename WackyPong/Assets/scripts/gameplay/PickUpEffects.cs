@@ -5,8 +5,11 @@ using UnityEngine.Events;
 
 public class PickUpEffects : Ball
 {
+    // PickUp Support
     protected PickUpEffectsEnum ballType;
     float freezeDuration;
+    int speedUpEffectSpeed;
+    float speedUpDuration;
 
     FreezerEffectsActivatedEvent freezerEffectActivated;
     SpeedUpEffectActiveEvent speedUpEffectActiveEvent;
@@ -22,14 +25,19 @@ public class PickUpEffects : Ball
         {
             freezeDuration = ConfigurationUtils.FreezerEffectDuration;
         }
+        if (ballType == PickUpEffectsEnum.SpeedUpEffect)
+        {
+            speedUpEffectSpeed = ConfigurationUtils.SpeedUpEffectForce;
+        }
 
-
+        // Event manager support
         freezerEffectActivated = new FreezerEffectsActivatedEvent();
         speedUpEffectActiveEvent = new SpeedUpEffectActiveEvent();
         ballDiedEvent = new BallDiedEvent();
 
+        // makes this class an invoker of following event
         EventManager.FreezerEffectInvoker(this);
-        EventManager.BallDiedInvoker(this);
+        //EventManager.BallDiedInvoker(this);
     }
 
     /// <summary>
@@ -45,21 +53,10 @@ public class PickUpEffects : Ball
     /// SpeedUp Effect Listener Creation
     /// </summary>
     /// <param name="listener"></param>
-    public void AddSpeedEffectActiveListener(UnityAction<int> listener)
+    public void AddSpeedEffectActiveListener(UnityAction<float, int> listener)
     {
         speedUpEffectActiveEvent.AddListener(listener);
     }
-    //public void AddBallDiedListener(UnityAction listener)
-    //{
-    //    ballDiedEvent.AddListener(listener);
-    //}
-
-
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     /// <summary>
     /// PickUp collison checking method
@@ -67,20 +64,48 @@ public class PickUpEffects : Ball
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Checks for specific pick up ball types and then invokes for Right Paddle
         if (collision.gameObject.CompareTag("RightPaddle"))
         {
-            freezerEffectActivated.Invoke(ScreenSide.Right, freezeDuration);
+            // Freezer Effect (Right Side)
+            //if (collision.gameObject.CompareTag("FreezeEffect"))
+            if(ballType == PickUpEffectsEnum.FreezerEffect)
+            {
+                freezerEffectActivated.Invoke(ScreenSide.Right, freezeDuration);
+                ballDiedEvent.Invoke();
+            }
+            // Speed Up Effect
+            //if (collision.gameObject.CompareTag("SpeedUpEffect"))
+            if (ballType == PickUpEffectsEnum.SpeedUpEffect)
+            {
+                //speedUpEffectActiveEvent.Invoke(speedUpDuration, speedUpEffectSpeed);
+                SpeedUpActive(speedUpDuration, speedUpEffectSpeed);
+                ballDiedEvent.Invoke();
+                Destroy(gameObject);
+            }
             Destroy(gameObject);
-            ballDiedEvent.Invoke();
-
         }
         else if (collision.gameObject.CompareTag("LeftPaddle"))
         {
-            freezerEffectActivated.Invoke(ScreenSide.Left, freezeDuration);
+            // Freezer Effect (Left Side)
+            //if (collision.gameObject.CompareTag("FreezeEffect"))
+            if (ballType == PickUpEffectsEnum.FreezerEffect)
+            {
+                freezerEffectActivated.Invoke(ScreenSide.Left, freezeDuration);
+                ballDiedEvent.Invoke();
+            }
+            // Speed Up Effect
+            //if (collision.gameObject.CompareTag("SpeedUpEffect"))
+            if (ballType == PickUpEffectsEnum.SpeedUpEffect)
+            {
+                //speedUpEffectActiveEvent.Invoke(speedUpDuration, speedUpEffectSpeed);
+                SpeedUpActive(speedUpDuration, speedUpEffectSpeed);
+                ballDiedEvent.Invoke();
+                Destroy(gameObject);
+            }
             Destroy(gameObject);
-            ballDiedEvent.Invoke();
         }
-       
+
     }
 
 

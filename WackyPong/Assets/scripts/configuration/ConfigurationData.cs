@@ -27,6 +27,7 @@ public class ConfigurationData
     static float pickUpEffectSpawnRate = .9f;
     static float freezerEffectDuration = 2;
     static int speedEffectForce = 10;
+    static float speedUpEffectDuration = 2;
 
     #endregion
 
@@ -141,6 +142,14 @@ public class ConfigurationData
         get { return speedEffectForce; }
     }
 
+    /// <summary>
+    /// Gets speedUp effect duration
+    /// </summary>
+    public float SpeedUpEffectDuration
+    {
+        get { return speedUpEffectDuration; }
+    }
+
 
     #endregion
 
@@ -211,7 +220,7 @@ public class ConfigurationData
         pickUpEffectSpawnRate = float.Parse(values[10]);
         freezerEffectDuration = float.Parse(values[11]);
         speedEffectForce = int.Parse(values[12]);
-        
+        speedUpEffectDuration = float.Parse(values[13]);
 
     }
 
